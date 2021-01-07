@@ -213,10 +213,10 @@ class Main(QMainWindow, Ui_Main):
 
     def abrirTelaComparacao(self): # função para abrir tela de comparação
         self.apagarValoresTelaComparacao()
-        self.QtStack.setCurrentIndex(5)
+        self.QtStack.setCurrentIndex(1)
 
     def abrirTelaConverter(self): # função para abrir tela de converter
-        self.QtStack.setCurrentIndex(6)
+        self.QtStack.setCurrentIndex(2)
 
     def abrirTelaBlast(self):
         self.apagarValoresTelaFiltros()
