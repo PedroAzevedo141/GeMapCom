@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'BLAST_03.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.1
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 
@@ -222,6 +213,12 @@ class Ui_tela_BLAST(object):
         self.ButtonSubject.clicked.connect(self.segundoArquivo)
 
     def ChecagemCheckBox(self):
+        '''
+
+            Função que faz a checagem dos checkBox da pagina. Tem como funcionalidade
+            indicar ao programa qual tipo de arquivo final o usuario deseja.
+
+        '''
         if (self.Tabular.isChecked()):
             self.Estilo = " -outfmt 6"
         elif (self.Pairwise.isChecked()):
@@ -251,6 +248,15 @@ class Ui_tela_BLAST(object):
 
 
     def primeiroArquivo(self):
+        '''
+
+            A função tem como funcionalidade:
+                -> Inserir, na variavel "self.Query", o caminho no qual o Arquivo 01
+                está na maquina do usuario.
+                -> E adicionar na tela inicial do BLAST o nome do arquivo e o nome do
+                genoma inserido.
+
+        '''
         Filename, _ = QtWidgets.QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO QUERY", "", "Arquivo de Fasta (*.fasta *.fa)")
         if Filename:
             Name = []
@@ -260,6 +266,15 @@ class Ui_tela_BLAST(object):
             self.CabecalhoArquivoQUERY.setText(self.primeiraLinha(Filename))
 
     def segundoArquivo(self):
+        '''
+
+            A função tem como funcionalidade:
+                -> Inserir, na variavel "self.Subject", o caminho no qual o Arquivo 02
+                está na maquina do usuario.
+                -> E adicionar na tela inicial do BLAST o nome do arquivo e o nome do
+                genoma inserido.
+
+        '''
         Filename, _ = QtWidgets.QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO SUBJECT", "", "Arquivo de Fasta (*.fasta *.fa)")
         if Filename:
             Name = []
@@ -269,20 +284,57 @@ class Ui_tela_BLAST(object):
             self.CabecalhoArquivoSUBJECT.setText(self.primeiraLinha(Filename))
 
     def primeiraLinha(self, Arquivo):
+        '''
+
+            Tem como funcionalidade retornar o nome do genoma prescrito no arquivo
+            inserido pelo usuario.
+                Obs. O nome do genoma fica na primeira linha do mapeamento.
+
+            Parametro:
+                    Arquivo (str): Uma string que contém o endereço do arquivo.
+
+            Retorno:
+                    lines (str): Uma string com o nome do genoma mapeado no arquivo.
+
+        '''
         f = open(Arquivo, 'r')
         lines = f.readlines(1)
         lines = lines.pop(0)
         f.close()
         return lines
 
+    def func_Paramentros(self):
+        '''
+
+            Tem como funcionalidade, guardar os valores atribuidos para o GAP,
+            MATCH e MISMATCH.
+
+        '''
+        self.penalty = (" -penalty " + self.LineMISMATCH.text())
+        self.reward = (" -reward "+ self.LineMATCH.text())
+
     def Alinhamento(self):
-        if (self.Query != None and len(self.Query) > 0) and (self.Subject != None and len(self.Subject) > 0):
-            self.penalty = (" -penalty " + self.LineMISMATCH.text())
-            self.reward = (" -reward "+ self.LineMATCH.text())
+        '''
+
+            Função principal do BLAST. Nela está todas as informações inseridas
+            pelo usuario.
+            O resumo desta função está na função "os.system" que faz o sistema
+            rodar o BLASTN usando comandos do terminal para rodar o que o usuario informou.
+            Também contém diversas condições para que não exista falta de informações.
+
+            Retorno:
+                    (Bool): O retorno booleano serve para notificar o erro para o software
+                    e assim não dar continuidade.
+
+            --> Função usada no GeMapCom.py
+
+        '''
+        if (self.Query != None and len(self.Query) > 0) and (self.Subject != None and len(self.Subject) > 0):       #Caso não tenha os dois arquivos inseridos, o software não ira alinhar os mapeamentos.
+            self.func_Paramentros()
             self.ChecagemCheckBox()
-            os.system("blastn -query " + self.Query + " -subject " + self.Subject + self.Estilo + self.penalty + self.reward + " -out Aux.out")
+            os.system("blastn -query " + self.Query + " -subject " + self.Subject + self.Estilo + self.penalty + self.reward + " -out ResultAlin.out")
             QtWidgets.QMessageBox.about(None, "Alinhamento", "Sucesso: Alinhado com SUCESSO!!")
-            if (self.Estilo == " -outfmt 9"):
+            if (self.Estilo == " -outfmt 9"):                                                                       #Quando o tipo de saida for binario, não irá para a tela de resultados, pois não tem metodos de visualizações ainda. O programa só ira alinhar e disponibilizar o arquivo.
                 QtWidgets.QMessageBox.about(None, "Alinhamento", "Sem Opção de Visualização: Arquivo Binario")
                 return None
             return True

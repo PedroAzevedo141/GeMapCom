@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'Filtros.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.1
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pandas as pd
 import Bio
@@ -167,11 +158,36 @@ class Ui_tela_Filtros_BLAST(object):
         self.retranslateUi(Filtros)
         QtCore.QMetaObject.connectSlotsByName(Filtros)
 
-    def CaminhoDiretorio_funcao(self, aux):
-        self.caminhoDiretorio = aux
+    def CaminhoDiretorio_funcao(self, caminhoAlinhamento):
+        """
+
+            Função que busca o caminho do arquivo, no servidor do usuario, no
+            qual está o resultado do alinhamento realizado.
+
+            Parametro:
+                    caminhoAlinhamento (str): Uma string que contém o endereço do arquivo.
+
+            --> Função usada no GeMapCom.py
+
+        """
+        self.caminhoDiretorio = caminhoAlinhamento
 
     def Filtragem(self):
-        dir_path = self.caminhoDiretorio + "/Aux.out"
+        """
+
+            Tem como funcionalidade realizar três tipos de filtragem, sendo eles:
+                - Filtro de identidade:
+                - Filtro do E-Value:
+                - Filtro RAG:
+
+            Ao terminar de filtrar o alinhamento obtido, o resultado é colocado
+            em um novo arquivo, nomeado de "Filtragem.out", para ser ilustrado na
+            tela de resultados.
+
+            --> Função usada no GeMapCom.py
+
+        """
+        dir_path = self.caminhoDiretorio + "/ResultAlin.out"
         files_align = glob.glob(dir_path)
         alinhamentos = pd.read_csv(files_align[0],header=None,delimiter = '	')
         # print('Alinhamentos da: {}'.format(len(alinhamentos)))
@@ -199,7 +215,7 @@ class Ui_tela_Filtros_BLAST(object):
 
     def retranslateUi(self, Filtros):
         _translate = QtCore.QCoreApplication.translate
-        Filtros.setWindowTitle(_translate("Filtros", "MainWindow"))
+        Filtros.setWindowTitle(_translate("Filtros", "BLAST - Tela dos Filtros"))
         self.scrollArea.setToolTip(_translate("Filtros", "Digite o valor o E-Value ..."))
         self.scrollArea.setAccessibleName(_translate("Filtros", "Digite o valor o E-Value ..."))
         self.pushButton_Voltar.setText(_translate("Filtros", "Voltar"))

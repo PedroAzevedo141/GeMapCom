@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'TestandoSaida.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.1
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -59,8 +50,27 @@ class Ui_tela_Resultado_BLAST(object):
         self.retranslateUi(Page_02)
         QtCore.QMetaObject.connectSlotsByName(Page_02)
 
-    def Teste(self):
+    def resultadoFiltragem(self):
+        """
+
+            Função que abre e lê o arquivo "Filtragem.out" e ilustra o mesmo na
+            tela.
+
+        """
         Result = 'Filtragem.out'
+        f = open(Result, 'r')
+        file_text = f.read()
+        self.Saida.setText(file_text)
+        f.close()
+
+    def resultadoAlinhamento(self):
+        """
+
+            Função que abre e lê o arquivo "ResultAlin.out" e ilustra o mesmo na
+            tela.
+
+        """
+        Result = 'ResultAlin.out'
         f = open(Result, 'r')
         file_text = f.read()
         self.Saida.setText(file_text)
@@ -68,7 +78,7 @@ class Ui_tela_Resultado_BLAST(object):
 
     def retranslateUi(self, Page_02):
         _translate = QtCore.QCoreApplication.translate
-        Page_02.setWindowTitle(_translate("Page_02", "MainWindow"))
+        Page_02.setWindowTitle(_translate("Page_02", "BLAST - Tela de Resultados"))
         self.Voltar.setText(_translate("Page_02", "Voltar"))
         self.Finalizar.setText(_translate("Page_02", "Finalizar"))
 

@@ -1,25 +1,24 @@
-import sys
 import os
+import sys
 
+from PyQt5.QtCore import QCoreApplication
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
-from PyQt5.QtCore import QCoreApplication
 
 from Bio import SeqIO
 
+from plotar.main import criar_imagem
+
+from telas.tela_BLAST import Ui_tela_BLAST
 from telas.tela_principal import Ui_Tela_Principal
-from telas.tela_comparacao import Ui_Tela_Comparacao
 from telas.tela_converter import Ui_Tela_Converter
 from telas.tela_resultado import Ui_Tela_Resultado
-from telas.tela_BLAST import Ui_tela_BLAST
-from telas.tela_resultado_BLAST import Ui_tela_Resultado_BLAST
+from telas.tela_comparacao import Ui_Tela_Comparacao
 from telas.tela_filtros_BLAST import Ui_tela_Filtros_BLAST
+from telas.tela_resultado_BLAST import Ui_tela_Resultado_BLAST
 
-
-from algoritmos.algorithm_needleman_wunsch import algorithm_needleman
 from algoritmos.algorithm_smith_waterman import algorithm_smith
-
-from plotar.main import criar_imagem
+from algoritmos.algorithm_needleman_wunsch import algorithm_needleman
 
 class Ui_Main(QtWidgets.QWidget):
     def setupUi(self, Main):
@@ -103,37 +102,45 @@ class Main(QMainWindow, Ui_Main):
         self.string_converter2 = ''
         self.string_convertida2 = ''
 
-        self.tela_principal.botao_tela_comparacao.clicked.connect(self.abrirTelaComparacao) # funções dos botões da tela principal
+        # Funções dos botões da tela principal.
         self.tela_principal.botao_sair.clicked.connect(self.fecharAplicacao)
-        self.tela_principal.botao_tela_converter.clicked.connect(self.abrirTelaConverter)
         self.tela_principal.botao_tela_outras.clicked.connect(self.abrirTelaBlast)
+        self.tela_principal.botao_tela_converter.clicked.connect(self.abrirTelaConverter)
+        self.tela_principal.botao_tela_comparacao.clicked.connect(self.abrirTelaComparacao)
 
-        self.tela_comparacao.botao_voltar.clicked.connect(self.voltarTelaPrincipal) # funções dos botões da tela comparação
+        # Funções dos botões da tela comparação.
+        self.tela_comparacao.botao_voltar.clicked.connect(self.voltarTelaPrincipal)
         self.tela_comparacao.botao_abrir_arquivo1.clicked.connect(self.abrirArquivo1)
         self.tela_comparacao.botao_abrir_arquivo2.clicked.connect(self.abrirArquivo2)
         self.tela_comparacao.botao_realizar_comparacao.clicked.connect(self.comparacao)
 
-        self.tela_converter.botao_voltar.clicked.connect(self.voltarTelaPrincipal) # funções dos botões da tela converter
-        self.tela_converter.botao_abrir_arquivo.clicked.connect(self.abrirArquivoConverter)
+        # Funções dos botões da tela converter.
         self.tela_converter.botao_converter.clicked.connect(self.converter)
+        self.tela_converter.botao_voltar.clicked.connect(self.voltarTelaPrincipal)
+        self.tela_converter.botao_abrir_arquivo.clicked.connect(self.abrirArquivoConverter)
 
-        self.tela_resultado.botao_voltar.clicked.connect(self.abrirTelaComparacao) # funções dos botões da tela resultado
-        self.tela_resultado.botao_salvar.clicked.connect(self.salvarResultadoTxt)
+        # Funções dos botões da tela resultado.
         self.tela_resultado.bota_gerar_imagem.clicked.connect(self.salvarImgem)
+        self.tela_resultado.botao_salvar.clicked.connect(self.salvarResultadoTxt)
+        self.tela_resultado.botao_voltar.clicked.connect(self.abrirTelaComparacao)
 
-
+        # Funções dos botões da tela do BLAST.
         self.Result = None
-
-        self.CaminhoDiretorio = os.path.dirname(os.path.realpath(__file__))          #TELA BLAST
+        self.tela_blast.Alinhar.clicked.connect(self.tela_Filtro_Ali)
+        self.CaminhoDiretorio = os.path.dirname(os.path.realpath(__file__))
         self.tela_blast.Voltar_Prin.clicked.connect(self.voltarTelaPrincipal)
-        self.tela_blast.Alinhar.clicked.connect(self.tela_Filtro1_F)
         self.tela_filtros_blast.CaminhoDiretorio_funcao(self.CaminhoDiretorio)
-        self.tela_resultado_blast.Voltar.clicked.connect(self.tela_Filtro2_F)
         self.tela_resultado_blast.Finalizar.clicked.connect(self.voltarTelaPrincipal)
         self.tela_filtros_blast.pushButton_Voltar.clicked.connect(self.abrirTelaBlast)
+        self.tela_resultado_blast.Voltar.clicked.connect(self.tela_Botao_Voltar_Resul)
         self.tela_filtros_blast.pushButton_Continuar.clicked.connect(self.resultadoBlast)
 
-    def apagarValoresTelaComparacao(self): # apagar os valores da tela comparação
+    def apagarValoresTelaComparacao(self):
+        """
+
+            Função para apagar os valores da tela comparação.
+
+        """
         self.tela_comparacao.setar_sequencia1.setText('')
         self.tela_comparacao.setar_sequencia2.setText('')
         self.tela_comparacao.match.setText('')
@@ -164,9 +171,22 @@ class Main(QMainWindow, Ui_Main):
         self.string_convertida2 = ''
 
     def apagarValoresTelaConverter(self):
-        self.tela_converter.setar_sequencia.setText('') # apagar os valores da tela converter
+        """
+
+            Função para apagar os valores da tela converter.
+
+        """
+        self.tela_converter.setar_sequencia.setText('')
 
     def apagarValoresTelaBlast(self):
+        """
+
+            Função para apagar os valores da tela INICIAL do BLAST.
+
+        """
+        self.tela_blast.LineGAP.setText("2")
+        self.tela_blast.LineMATCH.setText("2")
+        self.tela_blast.LineMISMATCH.setText("-3")
         self.tela_blast.NomeArquivoQUERY.clear()
         self.tela_blast.CabecalhoArquivoQUERY.clear()
         self.tela_blast.NomeArquivoSUBJECT.clear()
@@ -175,54 +195,106 @@ class Main(QMainWindow, Ui_Main):
         self.tela_blast.Subject = ''
 
     def apagarValoresTelaFiltros(self):
+        """
+
+            Função para apagar os valores da tela dos FILTROS do BLAST.
+
+        """
         self.tela_filtros_blast.checkBox_Identidade.setChecked(False)
         self.tela_filtros_blast.checkBox_EValue.setChecked(False)
         self.tela_filtros_blast.checkBox_RAG.setChecked(False)
 
-    def voltarTelaPrincipal(self): # função para voltar tela principal
+    def voltarTelaPrincipal(self):
+        """
+
+            Função para voltar à tela INICIAL.
+
+        """
         self.apagarValoresTelaComparacao()
         self.apagarValoresTelaConverter()
         self.apagarValoresTelaBlast()
 
         self.QtStack.setCurrentIndex(0)
 
-    def tela_Filtro1_F(self):
+    def tela_Filtro_Ali(self):
+        """
+
+            Função para entrar na tela de FILTROS do BLAST, utilizando o botão
+            "Alinhar" da tela inicial do BLAST.
+
+        """
         self.Result = self.tela_blast.Alinhamento()
-        if self.Result != None:
-            self.tela_resultado_blast.Teste()
-            if (self.tela_blast.Tabular.isChecked()):
+        if self.Result != None:                                                 #Dependendo do resultado retornado pela função "Alinhamento", presente no arquivo tela_BLAST.py, o software irá trocar de tela indo para tela de filtros ou para tela de resultado caso seja None o resultado a tela inicial irá permanecer.
+            if (self.tela_blast.Tabular.isChecked()):                           #Se o usuario escolher que o resultado seja de forma Tabular, a proxima tela será a dos FILTROS.
+                self.tela_resultado_blast.resultadoFiltragem()
                 self.QtStack.setCurrentIndex(6)
-            else:
+            else:                                                               #Se não for Tabular, a proxima tela será a de RESULTADOS.
+                self.tela_resultado_blast.resultadoAlinhamento()
                 self.QtStack.setCurrentIndex(5)
 
-    def tela_Filtro2_F(self):
+    def tela_Botao_Voltar_Resul(self):
+        """
+
+            Função de funcionalidade do botão "Voltar" que está na tela de RESULTADOS
+            do BLAST, dependendo do tipo de saida do resultado o "Voltar" irá para
+            uma tela especifica, como os filtros só tem funcionalidade para as saídas
+            TABULAR, então, se o resultado for TABULAR, quando apertar o botão "Voltar"
+            irá para tela de filtros, caso não seja TABULAR a tela será a de INICIO
+            do BLAST.
+
+        """
         if (self.tela_blast.Tabular.isChecked()):
             self.QtStack.setCurrentIndex(6)
         else:
-            self.apagarValoresTelaBlast()
             self.QtStack.setCurrentIndex(4)
 
-    def tela_Main2_F(self):
-        self.apagarValoresTelaBlast()
-        self.QtStack.setCurrentIndex(4)
+    # def tela_Main2_F(self):
+    #     self.apagarValoresTelaBlast()
+    #     self.QtStack.setCurrentIndex(4)
 
     def resultadoBlast(self):
+        """
+
+            Função para abrir a tela de resultados do BLAST contendo o resultado
+            apos as filtragens.
+
+        """
         self.tela_filtros_blast.Filtragem()
-        self.tela_resultado_blast.Teste()
+        self.tela_resultado_blast.resultadoFiltragem()
         self.QtStack.setCurrentIndex(5)
 
-    def abrirTelaComparacao(self): # função para abrir tela de comparação
+    def abrirTelaComparacao(self):
+        """
+
+            Função para abrir tela de comparação.
+
+        """
         self.apagarValoresTelaComparacao()
         self.QtStack.setCurrentIndex(1)
 
-    def abrirTelaConverter(self): # função para abrir tela de converter
+    def abrirTelaConverter(self):
+        """
+
+            Função para abrir tela de converter.
+
+        """
         self.QtStack.setCurrentIndex(2)
 
     def abrirTelaBlast(self):
+        """
+
+            Função para abrir tela do INICIAL do BLAST.
+
+        """
         self.apagarValoresTelaFiltros()
         self.QtStack.setCurrentIndex(4)
 
-    def abrirArquivo1(self): # função para abrir sequencia 1 e colocar na tela
+    def abrirArquivo1(self):
+        """
+
+            Função para abrir sequencia 1 e colocar na tela.
+
+        """
         self.seq1 = QFileDialog.getOpenFileName(self, 'Abrir sequencia 1', '/home', "Fasta Files (*.fasta *.fa)")
         if self.seq1[0]:
             f = open(self.seq1[0], 'r')
@@ -232,7 +304,12 @@ class Main(QMainWindow, Ui_Main):
                 self.data1 = f.read()
                 self.tela_comparacao.setar_sequencia1.setText(self.data1)
 
-    def abrirArquivo2(self): # função para abrir sequencia 2 e colocar na tela
+    def abrirArquivo2(self):
+        """
+
+            Função para abrir sequencia 2 e colocar na tela.
+
+        """
         self.seq2 = QFileDialog.getOpenFileName(self, 'Abrir sequencia 2', '/home', "Fasta Files (*.fasta *.fa)")
         if self.seq2[0]:
             f = open(self.seq2[0], 'r')
@@ -380,7 +457,12 @@ class Main(QMainWindow, Ui_Main):
                 self.create_image.salvarImage()
                 QMessageBox.about(self,'Atenção', 'Imagem Salva')
 
-    def abrirArquivoConverter(self): # função para abrir sequencia de converter
+    def abrirArquivoConverter(self):
+        """
+
+            Função para abrir sequencia de converter.
+
+        """
         if self.tela_converter.comboBox.currentText() == 'GENBANK - FASTA':
             self.gefasta = QFileDialog.getOpenFileName(self, 'Abrir sequencia', '/home', "Genbank Files (*.gbk)")
             if self.gefasta[0]:
@@ -398,7 +480,12 @@ class Main(QMainWindow, Ui_Main):
                     self.datafq = f.read()
                     self.tela_converter.setar_sequencia.setText(self.datafq)
 
-    def converter(self): # função para converter sequencia de converter
+    def converter(self):
+        """
+
+            Função para converter sequencia de converter.
+
+        """
         if self.tela_converter.setar_sequencia.toPlainText() == '':
             QMessageBox.about(self, 'Atenção', 'Selecione um arquivo')
         else:
@@ -419,7 +506,12 @@ class Main(QMainWindow, Ui_Main):
                         count = SeqIO.write(sequences, output_handle, "fasta")
                 self.apagarValoresTelaConverter()
 
-    def fecharAplicacao(self): # função para fechar aplicação
+    def fecharAplicacao(self):
+        """
+
+            Função para fechar o software.
+
+        """
         QCoreApplication.instance().quit()
 
 if __name__ == '__main__':

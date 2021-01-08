@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'tela_ajuda.ui'
-#
-# Created by: PyQt5 UI code generator 5.5.1
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.Qt import (Qt,QPixmap)
 
@@ -45,4 +37,3 @@ if __name__ == "__main__":
     ui.setupUi(Tela_Ajuda)
     Tela_Ajuda.show()
     sys.exit(app.exec_())
-
