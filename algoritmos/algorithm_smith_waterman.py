@@ -1,3 +1,5 @@
+#Inicializa com ZERO.
+
 import numpy as np
 
 class algorithm_smith:
@@ -13,6 +15,19 @@ class algorithm_smith:
         self.align2 = ''
 
     def mch(self, alpha, beta):
+        """
+
+        Funcionalidade de verificação do valor na matriz dos genomas.
+        Condiz com seu percuso e assim descobre se é MATCH, MISMATCH ou GAP.
+
+        Parametros:
+            alpha (str): Recebe o GAP. (-)
+            beta (str): Recebe o GAP. (-)
+
+        Retorno:
+            Serve para realizar a inicialização da matriz.
+
+        """
         if alpha == beta:
             return self.pt_waterman['match']
         elif alpha == '-' or beta == '-':
@@ -21,6 +36,11 @@ class algorithm_smith:
             return self.pt_waterman['mismatch']
 
     def water(self):
+        """
+
+        Toda a logica da função do needleman wunsch.
+
+        """
         m, n = len(self.s1), len(self.s2)
         H = np.zeros((m + 1, n + 1))
         T = np.zeros((m + 1, n + 1))
@@ -41,8 +61,6 @@ class algorithm_smith:
                     max_j = j
                     self.max_score = H[i][j]
 
-        # print('H=\n', H, '\n')
-        # print('T=\n', T, '\n')
         self.align1, self.align2 = '', ''
         i, j = max_i, max_j
 
@@ -61,7 +79,6 @@ class algorithm_smith:
                 a1 = self.s1[i - 1]
                 a2 = '-'
                 i -= 1
-            # print('%s ---> a1 = %s\t a2 = %s\n' % ('Add', a1, a2))
             self.align1 += a1
             self.align2 += a2
 
@@ -81,13 +98,3 @@ class algorithm_smith:
                 self.sym += ' '
 
         self.identity = iden / len(self.align1) * 100
-        # print('Identity = %2.1f percent' % self.identity)
-        # print('Score = %d' % self.max_score)
-        # print(self.align1)
-        # print(self.sym)
-        # print(self.align2)
-
-# if __name__ == '__main__':
-#     # a = algorithm_smith("AGCACACA","ACACACTA", 2, -1, -1)
-#     a = algorithm_smith("GGAT","GAT", 1, -1, -1)
-#     a.water()

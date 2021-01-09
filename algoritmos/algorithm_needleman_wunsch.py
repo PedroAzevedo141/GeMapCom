@@ -13,6 +13,19 @@ class algorithm_needleman:
         self.align2 = ''
 
     def mach(self, alpha, beta):
+        """
+
+        Funcionalidade de verificação do valor na matriz dos genomas.
+        Condiz com seu percuso e assim descobre se é MATCH, MISMATCH ou GAP.
+
+        Parametros:
+            alpha (str): Recebe o GAP. (-)
+            beta (str): Recebe o GAP. (-)
+
+        Retorno:
+            Serve para realizar a inicialização da matriz.
+
+        """
         if alpha == beta:
             return self.pt_wunsch['match']
         elif alpha == '-' or beta == '-':
@@ -21,6 +34,11 @@ class algorithm_needleman:
             return self.pt_wunsch['mismatch']
 
     def needle(self):
+        """
+
+        Toda a logica da função do needleman wunsch.
+
+        """
         m, n = len(self.s1), len(self.s2)
         self.score = np.zeros((m + 1, n + 1))
 
@@ -38,7 +56,6 @@ class algorithm_needleman:
                 insert = self.score[i][j - 1] + self.pt_wunsch['gap']
                 self.score[i][j] = max(diag, delete, insert)
 
-        # print('score matrix = \n%s\n' % score)
         self.align1, self.align2 = '', ''
         i, j = m, n
 
@@ -49,37 +66,26 @@ class algorithm_needleman:
             score_left = self.score[i][j - 1]
             score_up = self.score[i - 1][j]
 
-            # print('score_current: ', score_current)
-            # print('score_diag: ', score_diag)
-            # print('score_left: ', score_left)
-            # print('score_up: ', score_up)
-
             if score_current == score_diag + self.mach(self.s1[i - 1], self.s2[j - 1]):
-                # print('diag')
                 a1, a2 = self.s1[i - 1], self.s2[j - 1]
                 i, j = i - 1, j - 1
             elif score_current == score_up + self.pt_wunsch['gap']:
-                # print('up')
                 a1, a2 = self.s1[i - 1], '-'
                 i -= 1
             elif score_current == score_left + self.pt_wunsch['gap']:
-                # print('left')
                 a1, a2 = '-', self.s2[j - 1]
                 j -= 1
-            # print('%s ---> a1 = %s\t a2 = %s\n' % ('Add', a1, a2))
             self.align1 += a1
             self.align2 += a2
 
         while i > 0:
             a1, a2 = self.s1[i - 1], '-'
-            # print('%s ---> a1 = %s\t a2 = %s\n' % ('Add', a1, a2))
             self.align1 += a1
             self.align2 += a2
             i -= 1
 
         while j > 0:
             a1, a2 = '-', self.s2[j - 1]
-            # print('%s --> a1 = %s\t a2 = %s\n' % ('Add', a1, a2))
             self.align1 += a1
             self.align2 += a2
             j -= 1
@@ -103,16 +109,3 @@ class algorithm_needleman:
                 self.sym += ' '
 
         self.ident = self.ident / seqN * 100
-
-        # print('Identity = %2.1f percent' % self.ident)
-        # print('Score = %d\n' % self.seq_score)
-
-        # print(self.align1)
-        # print(self.sym)
-        # print(self.align2)
-
-# if __name__ == '__main__':
-#     # a = algorithm_needleman("TTCATA","TGCTCGTA", 5, -2, -6)
-#     # a = algorithm_needleman(string1, string2, 5, -2, -6)
-#     a = algorithm_needleman("GCAT","GAT", 1, -1, -1)
-#     a.needle()

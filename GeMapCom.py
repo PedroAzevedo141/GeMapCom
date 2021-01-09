@@ -320,6 +320,13 @@ class Main(QMainWindow, Ui_Main):
                 self.tela_comparacao.setar_sequencia2.setText(self.data2)
 
     def comparacao(self):
+        """
+
+            Função que realiza a comparação LOCAL e GLOBAL, submetendo os arquivosself.
+
+            -> Usada no arquivo tela_comparacao.py
+
+        """
         match = self.tela_comparacao.match.text()
         mismatch = self.tela_comparacao.mismatch.text()
         gap = self.tela_comparacao.gap.text()
@@ -337,6 +344,13 @@ class Main(QMainWindow, Ui_Main):
             self.comparacaoLocal()
 
     def comparacaoGlobal(self):
+        """
+
+            Função que realiza a comparação GLOBAL, utilizando o needleman_wunsh.
+
+            -> Usada no arquivo tela_comparacao.py / algorithm_needleman_wunsch.py
+
+        """
         with open(self.seq1[0], 'r') as fasta:
             for linha in fasta:
                 if not linha.startswith('>'):
@@ -377,6 +391,13 @@ class Main(QMainWindow, Ui_Main):
                                                     'Sequencia 2: ' + self.algo_needle.align2)
 
     def comparacaoLocal(self):
+        """
+
+            Função que realiza a comparação LOCAL, utilizando o smith_waterman.
+
+            -> Usada no arquivo tela_comparacao.py / algorithm_smith_waterman.py
+
+        """
         with open(self.seq1[0], 'r') as fasta:
             for linha in fasta:
                 if not linha.startswith('>'):
@@ -417,6 +438,14 @@ class Main(QMainWindow, Ui_Main):
                                                     'Sequencia 2: ' + self.algo_water.align2)
 
     def validarNumero(self, match, mismatch, gap):
+        """
+
+        Serve para validar o numero o MATCH, MISMATCH e GAP. Para não ficar
+        nenhum campo sem preenchimento.
+
+        -> tela_comparacao.py
+
+        """
         try:
             match = int(match)
             mismatch = int(mismatch)
@@ -426,6 +455,13 @@ class Main(QMainWindow, Ui_Main):
             return False
 
     def salvarResultadoTxt(self):
+        """
+
+        Funcionalidade de impressão dos resultados.
+
+        -> tela_resultado.py
+
+        """
         self.resultado = QFileDialog.getSaveFileName(self, 'Salvar Resultado', '/home', "Text (*.txt *.asc)")
 
         if self.resultado[0]:
@@ -437,6 +473,13 @@ class Main(QMainWindow, Ui_Main):
         QMessageBox.about(self,'Atenção', 'Resultado Salvo')
 
     def salvarImgem(self):
+        """
+
+        Funcionalidade de impressão dos resultados em IMAGEM.
+
+        -> Função da pasta plotar.
+
+        """
         if(self.tela_comparacao.comboBox.currentText() == 'GLOBAL'):
             img, _ = QFileDialog.getSaveFileName(self, 'Salvar Imagem', '/home', filter="PNG(*.png);; JPEG(*.jpg)")
             self.create_image = criar_imagem(img, self.algo_needle.align1, self.algo_needle.align2, self.algo_needle.sym, str(self.algo_needle.ident), str(self.algo_needle.seq_score))

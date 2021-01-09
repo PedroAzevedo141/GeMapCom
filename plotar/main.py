@@ -1,7 +1,9 @@
+#Arquivo para criar a imagem do resultado.
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
-import matplotlib.patches as mpatches 
+import matplotlib.patches as mpatches
 
 class criar_imagem:
 
@@ -14,20 +16,33 @@ class criar_imagem:
         self.score = score
 
     def separarLetras(self, sequencia):
+        """
+
+        Transformando uma string em lista.
+
+        Parametros:
+            sequencia (str): Uma string contendo um tipo de sequencia do resultado do alinhamento.
+
+        Retorno:
+            A sequencia do resultado do alinhamento só que em formato de LISTA.
+
+        """
         lista = []
         for letra in sequencia:
             lista.append(letra)
         return lista
 
     def salvarImage(self):
+        """
+
+        Criando imagem a parti da matplotlib.
+
+        """
         x_axis = range(len(self.seq1))
         x_axix_legenda = self.separarLetras(self.seq1)
         x2_axis = range(len(self.seq2))
         x2_axix_legenda = self.separarLetras(self.seq2)
         resposta = self.separarLetras(self.sym)
-        # print(x_axix_legenda)
-        # print(resposta)
-        # print(x2_axix_legenda)
 
         w = int(np.max([len(self.seq1), len(self.seq2)])/2)
 
@@ -55,8 +70,3 @@ class criar_imagem:
         white_patch2 = mpatches.Patch(color='white', label=texto_score)
         plt.legend(handles=[white_patch1, white_patch2, red_patch,green_patch], loc='upper left', prop={'size': 13})
         plt.savefig(self.path,bbox_inches='tight')
-
-# if __name__ == '__main__':
-#     a = criar_imagem("T--TCATA", "TGCTCGTA", "T  TC TA", 60, 59)
-#     a = criar_imagem("MAISSSTSGTSSSFPSRTTVMLLLFFFAASVGITDAQVGVCYGMQGNNLPPVSEVIALYKKSNITRMRIYDPNRAVLEALRGSNIEL-ILGVPNSDLQSLTNPSNAKSWVQKNVRGFWSSVLFRYIAVGNEISPVNRGTAWLAQFVLPAMRNIHDAIRSAGLQDQIKVSTA-IDLTLV-GNSYPPSAGAFRDDVRSYLDPIIGFLSSIRSPLLANIYPYFTYAYNPRDISLPYALFTS-PSVVVWDGQRGYKNLFDATLDALYSALERASGGSLEVVVSESGWPSAGAFAATFDNGRTYLSNLIQHVKGGTPKRPNRA-IETYL-FA-MFDENKKQPEVEKHFGLFFPNKWQKYNLNFSAEKNWDISTE--HNAT-------I-LFLKSDM","MKIGYDAKRAFLNNTGLGNYSRWLIKTTA-EHYPD-NSYLLYTPKLKHNKWRDFFHAFANIKVIT--PASKFLTA-LWRSKGVVTDLKNDGVHIYHGLSYELPSGIQTTGIRTVVSIHDLIFLRFPQYYNAI-DRWIYTAKTKKACDTAHR-I-IAISDRTKQDLVQLLGADPDKIEVIYQGCSPEFGMPIPTDR--LEAVRAKYSLPDEFLLTVGTIEERKNLMLLAKAL-THLKSSVPLVVV--G-KATKYL-DEVKAYLTQKELLDKVTFLHNVPFE-DLTAIYKLASLFIYPSRYEGFGIPILEALTSCLPVIASTGSCLEEAGGPVSRYVHPDDDKELATQIELVLTNTELRDHMIKAGHIYAERFKDATLAAQLMDIYKQLIQYA","M I                    L    A     D      Y              A      IT         A L    G    L   GV      S   PS         V         R     N I      TA        A R I  AI     QD      A  D   V      P  G      R  L       S     LL                 L   L  S P VVV  G    K L D     L           L  V  E         A  F     Y    I      T   P  A     L  A         P   K              L     K   I  E    AT       I   L    ",60, 59)
-#     a.salvarImage()
