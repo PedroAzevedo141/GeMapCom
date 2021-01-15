@@ -1,7 +1,31 @@
 import numpy as np
 
 class algorithm_needleman:
+    """
+    Uma classe para representar o algoritmo de Needleman-Wunsch.
 
+    ...
+
+    Atributos
+    ---------
+    s1 : str
+        String contendo a primeira sequencia inserida pelo usuario.
+    s2 : str
+        String contendo a segunda sequencia inserida pelo usuario.
+    match : str
+        Valor em String do Match dos genes.
+    mismatch : str
+        Valor em String do Mismatch dos genes.
+    gap : str
+        Valor em String do GAP dos genes.
+
+    Metodos
+    -------
+    mach(alpha, beta):
+        Verificador de valores da matriz dos genomas.
+    needle():
+        Realização das comparações dos genes (caracteres da string da sequencia) de forma global.
+    """
     def __init__(self, s1, s2, match, mismatch, gap):
         self.s1 = s1
         self.s2 = s2
@@ -36,7 +60,8 @@ class algorithm_needleman:
     def needle(self):
         """
 
-        Toda a logica da função do needleman wunsch.
+        Realização das comparações, que tem por objetivo realizar o alinhamento
+        global de duas seqüências impostas pelo usuario.
 
         """
         m, n = len(self.s1), len(self.s2)

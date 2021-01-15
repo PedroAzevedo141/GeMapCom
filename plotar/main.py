@@ -6,7 +6,35 @@ from matplotlib.pyplot import figure
 import matplotlib.patches as mpatches
 
 class criar_imagem:
+    """
+    Uma classe para criação de um arquivo contendo uma imagem das sequencias
+    informadas pelo usuario ou retornadas da ferramenta.
 
+    ...
+
+    Atributos
+    ---------
+    path : str
+        String contendo o caminho no qual o arquivo será salvo.
+    seq1 : str
+        String contendo a primeira sequencia de genomas.
+    seq2 : str
+        String contendo a segunda sequencia de genomas.
+    sym : str
+
+    ident : str
+        String contendo o valor da identidade final.
+    score : str
+        String contendo o valor do score final.
+
+    Metodos
+    -------
+    separarLetras(sequencia)
+        Tem como funcionalidade pegar uma string e transformar cada caracter
+        em uma lista.
+    salvarImage()
+        Criar a imagem utilizando as ferramentas da biblioteca matplotlib.
+    """
     def __init__(self, path, seq1, seq2, sym, ident, score):
         self.path = path
         self.seq1 = seq1
@@ -21,7 +49,8 @@ class criar_imagem:
         Transformando uma string em lista.
 
         Parametros:
-            sequencia (str): Uma string contendo um tipo de sequencia do resultado do alinhamento.
+            sequencia (str): Uma string contendo um tipo de sequencia do resultado
+            do alinhamento.
 
         Retorno:
             A sequencia do resultado do alinhamento só que em formato de LISTA.
@@ -35,7 +64,10 @@ class criar_imagem:
     def salvarImage(self):
         """
 
-        Criando imagem a parti da matplotlib.
+        Cria uma imagem a partir das duas listas, que contem os alinhamentos,
+        utilizando as ferramentas da biblioteca do matplotlib.
+
+        --> Função usada no GeMapCom.py
 
         """
         x_axis = range(len(self.seq1))

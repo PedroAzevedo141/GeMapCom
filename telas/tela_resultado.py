@@ -1,7 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_Tela_Resultado(object):
+    """
+
+    Classe que contem todas as configurações da tela de resultados da ferramenta.
+
+    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    gerenciamento das configurações e interações da tela em questão.
+
+    """
     def setupUi(self, Tela_Resultado):
         Tela_Resultado.setObjectName("Tela_Resultado")
         Tela_Resultado.resize(1276, 585)

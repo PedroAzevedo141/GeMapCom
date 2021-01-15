@@ -2,6 +2,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Tela_Comparacao(object):
+    """
+
+    Classe que contem todas as configurações da tela de comparacao da ferramenta.
+
+    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    gerenciamento das configurações e interações da tela em questão.
+
+    """
     def setupUi(self, Tela_Comparacao):
         Tela_Comparacao.setObjectName("Tela_Comparacao")
         Tela_Comparacao.resize(1276, 585)

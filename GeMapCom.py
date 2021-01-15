@@ -21,6 +21,14 @@ from algoritmos.algorithm_smith_waterman import algorithm_smith
 from algoritmos.algorithm_needleman_wunsch import algorithm_needleman
 
 class Ui_Main(QtWidgets.QWidget):
+    """
+
+    Classe que contem todas as configurações da tela inicial da ferramenta.
+
+    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    gerenciamento das configurações e interações da tela em questão.
+
+    """
     def setupUi(self, Main):
         Main.setObjectName('Main')
         Main.resize(1276, 585)
@@ -67,6 +75,11 @@ class Ui_Main(QtWidgets.QWidget):
 
 
 class Main(QMainWindow, Ui_Main):
+    """
+
+    Classe que contem todas as funcionalidades da tela inicial da ferramenta.
+
+    """
     def __init__(self, parent=None):
         super(Main, self).__init__(parent)
         self.setupUi(self)
@@ -248,10 +261,6 @@ class Main(QMainWindow, Ui_Main):
         else:
             self.QtStack.setCurrentIndex(4)
 
-    # def tela_Main2_F(self):
-    #     self.apagarValoresTelaBlast()
-    #     self.QtStack.setCurrentIndex(4)
-
     def resultadoBlast(self):
         """
 
@@ -322,7 +331,7 @@ class Main(QMainWindow, Ui_Main):
     def comparacao(self):
         """
 
-            Função que realiza a comparação LOCAL e GLOBAL, submetendo os arquivosself.
+            Função que realiza a comparação LOCAL e GLOBAL, submetendo os arquivos.
 
             -> Usada no arquivo tela_comparacao.py
 
@@ -346,7 +355,7 @@ class Main(QMainWindow, Ui_Main):
     def comparacaoGlobal(self):
         """
 
-            Função que realiza a comparação GLOBAL, utilizando o needleman_wunsh.
+            Função que realiza a comparação GLOBAL, utilizando o algoritmo de Needleman-Wunsch.
 
             -> Usada no arquivo tela_comparacao.py / algorithm_needleman_wunsch.py
 
@@ -393,7 +402,7 @@ class Main(QMainWindow, Ui_Main):
     def comparacaoLocal(self):
         """
 
-            Função que realiza a comparação LOCAL, utilizando o smith_waterman.
+            Função que realiza a comparação LOCAL, utilizando o algoritmo de Smith-Waterman.
 
             -> Usada no arquivo tela_comparacao.py / algorithm_smith_waterman.py
 
@@ -440,8 +449,8 @@ class Main(QMainWindow, Ui_Main):
     def validarNumero(self, match, mismatch, gap):
         """
 
-        Serve para validar o numero o MATCH, MISMATCH e GAP. Para não ficar
-        nenhum campo sem preenchimento.
+        Tem como funcionalidade validar o numero o MATCH, MISMATCH e GAP. Para
+        não ficar nenhum campo sem preenchimento.
 
         -> tela_comparacao.py
 
@@ -457,7 +466,7 @@ class Main(QMainWindow, Ui_Main):
     def salvarResultadoTxt(self):
         """
 
-        Funcionalidade de impressão dos resultados.
+        Funcionalidade de impressão dos resultados como .txt.
 
         -> tela_resultado.py
 
@@ -475,7 +484,7 @@ class Main(QMainWindow, Ui_Main):
     def salvarImgem(self):
         """
 
-        Funcionalidade de impressão dos resultados em IMAGEM.
+        Funcionalidade de impressão dos resultados como IMAGEM.
 
         -> Função da pasta plotar.
 
@@ -503,7 +512,8 @@ class Main(QMainWindow, Ui_Main):
     def abrirArquivoConverter(self):
         """
 
-            Função para abrir sequencia de converter.
+            Função para salvar o caminho da sequencia inserida pelo usuario na
+            tela de converter (tela_converter.py).
 
         """
         if self.tela_converter.comboBox.currentText() == 'GENBANK - FASTA':
@@ -526,7 +536,8 @@ class Main(QMainWindow, Ui_Main):
     def converter(self):
         """
 
-            Função para converter sequencia de converter.
+            Função que da funcionalidade a tela de converter da ferramenta,
+            convertendo assim a sequencia inserida pelo usuario.
 
         """
         if self.tela_converter.setar_sequencia.toPlainText() == '':

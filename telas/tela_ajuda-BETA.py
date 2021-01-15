@@ -2,6 +2,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.Qt import (Qt,QPixmap)
 
 class Ui_Tela_Ajuda(object):
+    """
+
+    Classe que contem todas as configurações da tela Ajuda da ferramenta.
+
+    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    gerenciamento das configurações e interações da tela em questão.
+
+    """
     def setupUi(self, Tela_Ajuda):
         Tela_Ajuda.setObjectName("Tela_Ajuda")
         Tela_Ajuda.resize(1276, 585)

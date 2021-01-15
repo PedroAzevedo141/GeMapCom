@@ -1,7 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_Tela_Principal(object):
+    """
+
+    Classe que contem todas as configurações da tela inicial da ferramenta.
+
+    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    gerenciamento das configurações e interações da tela em questão.
+
+    """
     def setupUi(self, Tela_Principal):
         Tela_Principal.setObjectName("Tela_Principal")
         Tela_Principal.resize(1276, 585)

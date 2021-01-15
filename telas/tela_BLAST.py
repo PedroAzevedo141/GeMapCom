@@ -2,6 +2,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 
 class Ui_tela_BLAST(object):
+    """
+
+    Classe que contem todas as configurações da tela inicial do BLAST.
+
+    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    gerenciamento das configurações e interações da tela em questão.
+
+    """
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(922, 586)

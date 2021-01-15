@@ -3,7 +3,31 @@
 import numpy as np
 
 class algorithm_smith:
+    """
+    Uma classe para representar o algoritmo de Smith-Waterman.
 
+    ...
+
+    Atributos
+    ---------
+    s1 : str
+        String contendo a primeira sequencia inserida pelo usuario.
+    s2 : str
+        String contendo a segunda sequencia inserida pelo usuario.
+    match : str
+        Valor em String do Match dos genes.
+    mismatch : str
+        Valor em String do Mismatch dos genes.
+    gap : str
+        Valor em String do GAP dos genes.
+
+    Metodos
+    -------
+    mch(alpha, beta):
+        Verificador de valores da matriz dos genomas.
+    water():
+        Realização das comparações dos genes (caracteres da string da sequencia) de forma local.
+    """
     def __init__(self, s1, s2, match, mismatch, gap):
         self.s1 = s1
         self.s2 = s2
@@ -38,7 +62,8 @@ class algorithm_smith:
     def water(self):
         """
 
-        Toda a logica da função do needleman wunsch.
+        Realização das comparações, que tem por objetivo realizar o alinhamento
+        local de duas seqüências impostas pelo usuario.
 
         """
         m, n = len(self.s1), len(self.s2)

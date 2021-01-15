@@ -1,7 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_Tela_Converter(object):
+    """
+
+    Classe que contem todas as configurações da tela de converter da ferramenta.
+
+    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    gerenciamento das configurações e interações da tela em questão.
+
+    """
     def setupUi(self, Tela_Converter):
         Tela_Converter.setObjectName("Tela_Converter")
         Tela_Converter.resize(812, 585)

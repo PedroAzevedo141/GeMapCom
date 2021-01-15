@@ -1,16 +1,24 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-import pandas as pd
+import os
 import Bio
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
-from Bio import SeqIO
 import glob
 import warnings
+import numpy as np
+import pandas as pd
+from Bio import SeqIO
+import matplotlib.pyplot as plt
 warnings.filterwarnings("ignore")
-import os
+from matplotlib.lines import Line2D
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_tela_Filtros_BLAST(object):
+    """
+
+    Classe que contem todas as configurações da tela dos filtros do BLAST.
+
+    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    gerenciamento das configurações e interações da tela em questão.
+
+    """
     def setupUi(self, Filtros):
         Filtros.setObjectName("Filtros")
         Filtros.resize(857, 523)
