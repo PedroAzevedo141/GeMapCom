@@ -7,18 +7,18 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
 
 from Bio import SeqIO
 
-from plotar.main import criar_imagem
+from Plotar.main import criar_imagem
 
-from telas.tela_BLAST import Ui_tela_BLAST
-from telas.tela_principal import Ui_Tela_Principal
-from telas.tela_converter import Ui_Tela_Converter
-from telas.tela_resultado import Ui_Tela_Resultado
-from telas.tela_comparacao import Ui_Tela_Comparacao
-from telas.tela_filtros_BLAST import Ui_tela_Filtros_BLAST
-from telas.tela_resultado_BLAST import Ui_tela_Resultado_BLAST
+from Telas.tela_BLAST import Ui_tela_BLAST
+from Telas.tela_principal import Ui_Tela_Principal
+from Telas.tela_converter import Ui_Tela_Converter
+from Telas.tela_resultado import Ui_Tela_Resultado
+from Telas.tela_comparacao import Ui_Tela_Comparacao
+from Telas.tela_filtros_BLAST import Ui_tela_Filtros_BLAST
+from Telas.tela_resultado_BLAST import Ui_tela_Resultado_BLAST
 
-from algoritmos.algorithm_smith_waterman import algorithm_smith
-from algoritmos.algorithm_needleman_wunsch import algorithm_needleman
+from Algoritmos.algorithm_smith_waterman import algorithm_smith
+from Algoritmos.algorithm_needleman_wunsch import algorithm_needleman
 
 class Ui_Main(QtWidgets.QWidget):
     """
