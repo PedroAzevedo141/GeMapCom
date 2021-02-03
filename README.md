@@ -6,7 +6,7 @@ Uma ferramenta que auxilia e facilita pesquisadores da área a realizá compara�
 
 ### Instalação da ferramenta no Linux Mint
 
-A ferramenta está desenvolvida na linguagem python, versão 3.0, e utiliza diversas bibliotecas externas. Para que a ferramenta rode em seu Linux é nescessario ter instalado o python e suas respectivas bibliotecas, mostrado abaixo;
+A ferramenta está desenvolvida na linguagem python, versão 3.0, e utiliza diversas bibliotecas externas. Para que a ferramenta rode em seu Linux é necessário ter instalado o python e suas respectivas bibliotecas, mostrado abaixo;
 
  - Primeiro passo, instale o Python 3.0:
 
@@ -32,7 +32,7 @@ A ferramenta está desenvolvida na linguagem python, versão 3.0, e utiliza dive
 
         $ pip3 install pandas
 
- - Quinto passo, instalar o BLAST, software licenciada pela NCBi, para realização de comparações genomicas de alta capacidade:
+ - Sétimo passo, instalar o BLAST, software licenciada pela NCBi, para realização de comparações genomicas de alta capacidade:
 
         $ sudo apt install ncbi-blast+
 
@@ -40,7 +40,7 @@ A ferramenta está desenvolvida na linguagem python, versão 3.0, e utiliza dive
 
 ### Execução da ferramenta
 
-Pecorra pelo terminal até a pasta na qual está situado a ferramenta, então execute o seguinte comando:
+Percorra pelo terminal até a pasta na qual está situado a ferramenta, então execute o seguinte comando:
 
     $ python3 GeMapCom.py
 
