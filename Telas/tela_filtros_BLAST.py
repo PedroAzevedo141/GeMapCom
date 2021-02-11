@@ -21,7 +21,7 @@ class Ui_tela_Filtros_BLAST(object):
     """
     def setupUi(self, Filtros):
         Filtros.setObjectName("Filtros")
-        Filtros.resize(857, 523)
+        Filtros.resize(922, 586)
         Filtros.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.centralwidget = QtWidgets.QWidget(Filtros)
         self.centralwidget.setObjectName("centralwidget")
