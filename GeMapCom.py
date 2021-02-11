@@ -304,7 +304,7 @@ class Main(QMainWindow, Ui_Main):
             Função para abrir sequencia 1 e colocar na tela.
 
         """
-        self.seq1 = QFileDialog.getOpenFileName(self, 'Abrir sequencia 1', '/home', "Fasta Files (*.fasta *.fa)")
+        self.seq1 = QFileDialog.getOpenFileName(self, 'Abrir sequencia 1', "", "Fasta Files (*.fasta *.fa)")
         if self.seq1[0]:
             f = open(self.seq1[0], 'r')
 
@@ -319,7 +319,7 @@ class Main(QMainWindow, Ui_Main):
             Função para abrir sequencia 2 e colocar na tela.
 
         """
-        self.seq2 = QFileDialog.getOpenFileName(self, 'Abrir sequencia 2', '/home', "Fasta Files (*.fasta *.fa)")
+        self.seq2 = QFileDialog.getOpenFileName(self, 'Abrir sequencia 2', "", "Fasta Files (*.fasta *.fa)")
         if self.seq2[0]:
             f = open(self.seq2[0], 'r')
 
@@ -517,7 +517,7 @@ class Main(QMainWindow, Ui_Main):
 
         """
         if self.tela_converter.comboBox.currentText() == 'GENBANK - FASTA':
-            self.gefasta = QFileDialog.getOpenFileName(self, 'Abrir sequencia', '/home', "Genbank Files (*.gbk)")
+            self.gefasta = QFileDialog.getOpenFileName(self, 'Abrir sequencia', "", "Genbank Files (*.gbk)")
             if self.gefasta[0]:
                 f = open(self.gefasta[0], 'r')
 
@@ -525,7 +525,7 @@ class Main(QMainWindow, Ui_Main):
                     self.datage = f.read()
                     self.tela_converter.setar_sequencia.setText(self.datage)
         else:
-            self.fqfasta = QFileDialog.getOpenFileName(self, 'Abrir sequencia', '/home', "FastaQ Files (*.fastaq)")
+            self.fqfasta = QFileDialog.getOpenFileName(self, 'Abrir sequencia', "", "FastaQ Files (*.fastaq)")
             if self.fqfasta[0]:
                 f = open(self.fqfasta[0], 'r')
 
