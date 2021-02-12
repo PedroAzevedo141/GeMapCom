@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui  import QFont
 
 
 class Ui_Tela_Converter(object):
@@ -11,6 +12,7 @@ class Ui_Tela_Converter(object):
 
     """
     def setupUi(self, Tela_Converter):
+        font = QFont("Consolas", 9)
         Tela_Converter.setObjectName("Tela_Converter")
         Tela_Converter.resize(812, 585)
         self.centralwidget = QtWidgets.QWidget(Tela_Converter)
@@ -51,6 +53,7 @@ class Ui_Tela_Converter(object):
         self.verticalLayout.addWidget(self.line_2)
         self.setar_sequencia = QtWidgets.QTextEdit(self.centralwidget)
         self.setar_sequencia.setReadOnly(True)
+        self.setar_sequencia.setFont(font)
         self.setar_sequencia.setObjectName("setar_sequencia")
         self.verticalLayout.addWidget(self.setar_sequencia)
         self.botao_abrir_arquivo = QtWidgets.QPushButton(self.centralwidget)

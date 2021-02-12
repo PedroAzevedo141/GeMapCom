@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui  import QFont
 
 class Ui_tela_Resultado_BLAST(object):
     """
@@ -34,10 +35,10 @@ class Ui_tela_Resultado_BLAST(object):
         self.frame.setObjectName("frame")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.frame)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.Saida = QtWidgets.QLabel(self.frame)
-        self.Saida.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.Saida.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.Saida.setText("")
+        self.Saida = QtWidgets.QTextEdit(self.frame)
+        self.Saida.setReadOnly(True)
+        font = QFont("Consolas", 9)
+        self.Saida.setFont(font)
         self.Saida.setObjectName("Saida")
         self.gridLayout_3.addWidget(self.Saida, 0, 0, 1, 1)
         self.gridLayout_2.addWidget(self.frame, 0, 0, 1, 1)
@@ -85,16 +86,6 @@ class Ui_tela_Resultado_BLAST(object):
 
     def retranslateUi(self, Page_02):
         _translate = QtCore.QCoreApplication.translate
-        Page_02.setWindowTitle(_translate("Page_02", "BLAST - Tela de Resultados"))
+        Page_02.setWindowTitle(_translate("Page_02", "MainWindow"))
         self.Voltar.setText(_translate("Page_02", "Voltar"))
         self.Finalizar.setText(_translate("Page_02", "Finalizar"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Page_02 = QtWidgets.QMainWindow()
-    ui = Ui_tela_Resultado_BLAST()
-    ui.setupUi(Page_02)
-    Page_02.show()
-    sys.exit(app.exec_())
