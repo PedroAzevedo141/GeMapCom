@@ -184,9 +184,12 @@ class Ui_tela_Filtros_BLAST(object):
         """
 
             Tem como funcionalidade realizar três tipos de filtragem, sendo eles:
-                - Filtro de identidade:
-                - Filtro do E-Value:
-                - Filtro RAG:
+                - Filtro de identidade: Filtra de acordo com a identidade resultante
+                dos alinhamentos comparado com o valor inserido pelo usuario.
+                - Filtro do E-Value: Filtra de acordo com o E-Value resultante
+                dos alinhamentos comparado com o valor inserido pelo usuario.
+                - Filtro RAG: Filtragem pela Razão entre o Tamanho do Alinhamento e o
+                Tamanho do Gene (RAG)
 
             Ao terminar de filtrar o alinhamento obtido, o resultado é colocado
             em um novo arquivo, nomeado de "Filtragem.out", para ser ilustrado na
