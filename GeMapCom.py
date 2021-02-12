@@ -544,20 +544,26 @@ class Main(QMainWindow, Ui_Main):
             QMessageBox.about(self, 'Atenção', 'Selecione um arquivo')
         else:
             if self.tela_converter.comboBox.currentText() == 'GENBANK - FASTA':
-                QMessageBox.about(self,'Atenção', 'Sequencia convertida')
-                self.gefasta_salvar = QFileDialog.getSaveFileName(self, 'Salvar', '/home', "Fasta Files (*.fasta)")
-                with open(self.gefasta[0], "r") as input_handle:
-                    with open(self.gefasta_salvar[0], "w") as output_handle:
-                        sequences = SeqIO.parse(input_handle, "genbank")
-                        count = SeqIO.write(sequences, output_handle, "fasta")
+                self.gefasta_salvar = QFileDialog.getSaveFileName(self, 'Salvar', "", "Fasta Files (*.fasta)")
+                if self.gefasta_salvar[0] != '':
+                    with open(self.gefasta[0], "r") as input_handle:
+                        with open(self.gefasta_salvar[0], "w") as output_handle:
+                            sequences = SeqIO.parse(input_handle, "genbank")
+                            count = SeqIO.write(sequences, output_handle, "fasta")
+                    QMessageBox.about(None,'Atenção', 'Sequência convertida')
+                else:
+                    QMessageBox.about(None,'Atenção', 'Sequência não convertida')
                 self.apagarValoresTelaConverter()
             else:
-                QMessageBox.about(self,'Atenção', 'Sequencia convertida')
-                self.fqfasta_salvar = QFileDialog.getSaveFileName(self, 'Salvar', '/home', "Fasta Files (*.fasta)")
-                with open(self.fqfasta[0], "r") as input_handle:
-                    with open(self.fqfasta_salvar[0], "w") as output_handle:
-                        sequences = SeqIO.parse(input_handle, "fastq")
-                        count = SeqIO.write(sequences, output_handle, "fasta")
+                self.fqfasta_salvar = QFileDialog.getSaveFileName(self, 'Salvar', "", "Fasta Files (*.fasta)")
+                if self.fqfasta_salvar[0] != '':
+                    with open(self.fqfasta[0], "r") as input_handle:
+                        with open(self.fqfasta_salvar[0], "w") as output_handle:
+                            sequences = SeqIO.parse(input_handle, "fastq")
+                            count = SeqIO.write(sequences, output_handle, "fasta")
+                    QMessageBox.about(None,'Atenção', 'Sequência convertida')
+                else:
+                    QMessageBox.about(None,'Atenção', 'Sequência não convertida')
                 self.apagarValoresTelaConverter()
 
     def fecharAplicacao(self):
