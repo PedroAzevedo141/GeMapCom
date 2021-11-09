@@ -10,31 +10,31 @@ A ferramenta está desenvolvida na linguagem python, versão 3.0, e utiliza dive
 
  - Primeiro passo, instale o Python 3.0:
 
-        $ sudo apt-get install python3
+       sudo apt-get install python3
 
  - Segundo passo, instalar o gerenciador de pacotes do python 3.0:
 
-        $ sudo apt-get install python3-pip
+       sudo apt-get install python3-pip
 
  - Terceiro passo, instalar o PyQt5, biblioteca responsável pela personalização das interfaces:
 
-        $ pip3 install pyqt5
+       pip3 install pyqt5
 
  - Quarto passo, instalar o BioPython, biblioteca responsável pela manipulação dos arquivos que contém as sequencias:
 
-        $ pip3 install biopython
+       pip3 install biopython
 
  - Quinto passo, instalar o MatPlot, biblioteca responsável por métodos de visualização de certo tipos de dados:
 
-        $ pip3 install matplot
+       pip3 install matplot
 
  - Sexto passo, instalar o Pandas, biblioteca responsável pela manipulação de certos tipos de dados:
 
-        $ pip3 install pandas
+       pip3 install pandas
 
  - Sétimo passo, instalar o BLAST, software licenciada pela NCBi, para realização de comparações genomicas de alta capacidade:
 
-        $ sudo apt install ncbi-blast+
+       sudo apt install ncbi-blast+
 
 -------
 
