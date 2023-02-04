@@ -221,7 +221,7 @@ class Ui_tela_Filtros_BLAST(object):
         if self.checkBox_RAG.isChecked():
             pass
         arquivo = open("Filtragem.out", "w")
-        arquivo.write(str(alinhamentos))
+        arquivo.write(alinhamentos.to_string())
         arquivo.close()
 
     def retranslateUi(self, Filtros):

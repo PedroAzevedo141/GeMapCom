@@ -265,13 +265,14 @@ class Ui_tela_BLAST(object):
                 genoma inserido.
 
         '''
-        Filename, _ = QtWidgets.QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO QUERY", "", "Arquivo de Fasta (*.fasta *.fa)")
+        # Filename, _ = QtWidgets.QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO QUERY", "", "Arquivo de Fasta (*.fasta *.fa)")
+        Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/Yersinia-BLAST.fasta"
         if Filename:
             Name = []
             self.Query = Filename
             Name = Filename.split("/")
             self.NomeArquivoQUERY.setText(Name[-1])
-            self.CabecalhoArquivoQUERY.setText(self.primeiraLinha(Filename))
+            self.CabecalhoArquivoQUERY.setText(self.primeiraLinha(Filename)[1:])
 
     def segundoArquivo(self):
         '''
@@ -283,13 +284,14 @@ class Ui_tela_BLAST(object):
                 genoma inserido.
 
         '''
-        Filename, _ = QtWidgets.QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO SUBJECT", "", "Arquivo de Fasta (*.fasta *.fa)")
+        # Filename, _ = QtWidgets.QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO SUBJECT", "", "Arquivo de Fasta (*.fasta *.fa)")
+        Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/Xanthomonas-BLAST.fasta"
         if Filename:
             Name = []
             self.Subject = Filename
             Name = Filename.split("/")
             self.NomeArquivoSUBJECT.setText(Name[-1])
-            self.CabecalhoArquivoSUBJECT.setText(self.primeiraLinha(Filename))
+            self.CabecalhoArquivoSUBJECT.setText(self.primeiraLinha(Filename)[1:])
 
     def primeiraLinha(self, Arquivo):
         '''
@@ -318,8 +320,8 @@ class Ui_tela_BLAST(object):
             MATCH e MISMATCH.
 
         '''
-        self.penalty = (" -penalty " + self.LineMISMATCH.text())
-        self.reward = (" -reward "+ self.LineMATCH.text())
+        self.penalty = (" -penalty " + self.LineMISMATCH.text()) if len(self.LineMISMATCH.text()) > 0 else " -penalty -3"
+        self.reward = (" -reward "+ self.LineMATCH.text()) if len(self.LineMATCH.text()) > 0 else " -reward 2"
 
     def Alinhamento(self):
         '''
