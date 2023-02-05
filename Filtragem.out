@@ -1,14 +1,34 @@
-             0            1       2     3     4    5        6        7        8        9             10      11
-0   NC_003143.1  NC_003902.1  70.915  7203  1729  294  4197357  4204372  1050459  1043436  0.000000e+00  2831.0
-1   NC_003143.1  NC_003902.1  82.814  3212   421   97  3648978  3652127  4557678  4560820  0.000000e+00  2805.0
-2   NC_003143.1  NC_003902.1  82.814  3212   421   97  4175262  4178411  4557678  4560820  0.000000e+00  2805.0
-3   NC_003143.1  NC_003902.1  82.820  3213   419   99    14253    17402  4560820  4557678  0.000000e+00  2805.0
-4   NC_003143.1  NC_003902.1  82.814  3212   421   97  3648978  3652127  4945546  4948688  0.000000e+00  2805.0
-..          ...          ...     ...   ...   ...  ...      ...      ...      ...      ...           ...     ...
-59  NC_003143.1  NC_003902.1  87.013    77    10    0  2946414  2946490   578653   578729  7.140000e-13    84.8
-60  NC_003143.1  NC_003902.1  84.146    82     8    4   348754   348832  2888678  2888757  1.750000e-10    76.8
-61  NC_003143.1  NC_003902.1  84.146    82     8    4  1063925  1064003  2888757  2888678  1.750000e-10    76.8
-62  NC_003143.1  NC_003902.1  89.474    57     4    1  2946231  2946285  1032404  1032348  1.280000e-07    67.3
-63  NC_003143.1  NC_003902.1  80.247    81    14    2  3148436  3148515   601755   601676  3.860000e-07    65.7
-
-[64 rows x 12 columns]
+                                                                                                                                        0
+0                                                                                                                          BLASTP 2.12.0+
+1                                                                          Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+2                                                                         Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+3                                                                         Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+4                                                                     protein database search programs", Nucleic Acids Res. 25:3389-3402.
+5                                                                      Reference for composition-based statistics: Alejandro A. Schaffer,
+6                                                                     L. Aravind, Thomas L. Madden, Sergei Shavirin, John L. Spouge, Yuri
+7                                                                              I. Wolf, Eugene V. Koonin, and Stephen F. Altschul (2001),
+8   Improving the accuracy of PSI-BLAST protein database searches with\ncomposition-based statistics and other refinements, Nucleic Acids
+9                                                                                                                      Res. 29:2994-3005.
+10                                                                                          Database: User specified sequence set (Input:
+11                                                                   /home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/seq2.fasta)
+12                                                                                                                                      .
+13                                                                                                       1 sequences; 1,470 total letters
+14                                                                                                              Query= Sequencia Teste 01
+15                                                                                                                            Length=2030
+16                                                                                                              ***** No hits found *****
+17                                                                                          Lambda      K        H        a         alpha
+18                                                                                             0.328    0.143    0.613    0.792     4.96 
+19                                                                                                                                 Gapped
+20                                                                                 Lambda      K        H        a         alpha    sigma
+21                                                                                    0.267   0.0410    0.140     1.90     42.6     43.6 
+22                                                                                                   Effective search space used: 2804804
+23                                                                                          Database: User specified sequence set (Input:
+24                                                                   /home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/seq2.fasta)
+25                                                                                                                                      .
+26                                                                                                                  Posted date:  Unknown
+27                                                                                                   Number of letters in database: 1,470
+28                                                                                                    Number of sequences in database:  1
+29                                                                                                                       Matrix: BLOSUM62
+30                                                                                             Gap Penalties: Existence: 11, Extension: 1
+31                                                                                                        Neighboring words threshold: 11
+32                                                                                                           Window for multiple hits: 40

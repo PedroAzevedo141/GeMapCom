@@ -1,0 +1,3 @@
+Links:
+    Site que informa algumas ferramentas da area de bioinformatica visando o mapeamento genetico:
+        https://blog.varsomics.com/principais-ferramentas-online-de-bioinformatica/

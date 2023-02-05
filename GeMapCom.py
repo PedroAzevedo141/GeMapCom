@@ -2,8 +2,10 @@ import os
 import sys
 
 from PyQt5.QtCore import QCoreApplication
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
+
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 
 from Bio import SeqIO
 
@@ -16,11 +18,13 @@ from Telas.tela_resultado import Ui_Tela_Resultado
 from Telas.tela_comparacao import Ui_Tela_Comparacao
 from Telas.tela_filtros_BLAST import Ui_tela_Filtros_BLAST
 from Telas.tela_resultado_BLAST import Ui_tela_Resultado_BLAST
+from Telas.qDialogBlast import Ui_Dialog_Custom
 
 from Algoritmos.algorithm_smith_waterman import algorithm_smith
 from Algoritmos.algorithm_needleman_wunsch import algorithm_needleman
 
-class Ui_Main(QtWidgets.QWidget):
+
+class Ui_Main(QWidget):
     """
 
     Classe que contem todas as configurações da tela inicial da ferramenta.
@@ -29,20 +33,21 @@ class Ui_Main(QtWidgets.QWidget):
     gerenciamento das configurações e interações da tela em questão.
 
     """
+
     def setupUi(self, Main):
         Main.setObjectName('Main')
         Main.resize(1276, 585)
         Main.setFixedSize(1276, 585)
 
-        self.QtStack = QtWidgets.QStackedLayout()
+        self.QtStack = QStackedLayout()
 
-        self.stack0 = QtWidgets.QMainWindow()
-        self.stack1 = QtWidgets.QMainWindow()
-        self.stack2 = QtWidgets.QMainWindow()
-        self.stack3 = QtWidgets.QMainWindow()
-        self.stack4 = QtWidgets.QMainWindow()
-        self.stack5 = QtWidgets.QMainWindow()
-        self.stack6 = QtWidgets.QMainWindow()
+        self.stack0 = QMainWindow()
+        self.stack1 = QMainWindow()
+        self.stack2 = QMainWindow()
+        self.stack3 = QMainWindow()
+        self.stack4 = QMainWindow()
+        self.stack5 = QMainWindow()
+        self.stack6 = QMainWindow()
 
         self.tela_principal = Ui_Tela_Principal()
         self.tela_principal.setupUi(self.stack0)
@@ -80,13 +85,14 @@ class Main(QMainWindow, Ui_Main):
     Classe que contem todas as funcionalidades da tela inicial da ferramenta.
 
     """
+
     def __init__(self, parent=None):
         super(Main, self).__init__(parent)
         self.setupUi(self)
-        self.seq1 = '' # sequencia 1 data 1
+        self.seq1 = ''  # sequencia 1 data 1
         self.data1 = ''
 
-        self.seq2 = '' # sequencia 2 data 2
+        self.seq2 = ''  # sequencia 2 data 2
         self.data2 = ''
 
         self.gefasta = ''
@@ -107,7 +113,7 @@ class Main(QMainWindow, Ui_Main):
 
         self.lista_converter1 = []
         self.seq_converter1 = ''
-        self.string_converter1  = ''
+        self.string_converter1 = ''
         self.string_convertida1 = ''
 
         self.lista_converter2 = []
@@ -117,36 +123,58 @@ class Main(QMainWindow, Ui_Main):
 
         # Funções dos botões da tela principal.
         self.tela_principal.botao_sair.clicked.connect(self.fecharAplicacao)
-        self.tela_principal.botao_tela_outras.clicked.connect(self.abrirTelaBlast)
-        self.tela_principal.botao_tela_converter.clicked.connect(self.abrirTelaConverter)
-        self.tela_principal.botao_tela_comparacao.clicked.connect(self.abrirTelaComparacao)
+        self.tela_principal.botao_tela_outras.clicked.connect(
+            self.abrirTelaBlast)
+        self.tela_principal.botao_tela_converter.clicked.connect(
+            self.abrirTelaConverter)
+        self.tela_principal.botao_tela_comparacao.clicked.connect(
+            self.abrirTelaComparacao)
 
         # Funções dos botões da tela comparação.
-        self.tela_comparacao.botao_voltar.clicked.connect(self.voltarTelaPrincipal)
-        self.tela_comparacao.botao_abrir_arquivo1.clicked.connect(self.abrirArquivo1)
-        self.tela_comparacao.botao_abrir_arquivo2.clicked.connect(self.abrirArquivo2)
-        self.tela_comparacao.botao_realizar_comparacao.clicked.connect(self.comparacao)
+        self.tela_comparacao.botao_voltar.clicked.connect(
+            self.voltarTelaPrincipal)
+        self.tela_comparacao.botao_abrir_arquivo1.clicked.connect(
+            self.abrirArquivo1)
+        self.tela_comparacao.botao_abrir_arquivo2.clicked.connect(
+            self.abrirArquivo2)
+        self.tela_comparacao.botao_realizar_comparacao.clicked.connect(
+            self.comparacao)
 
         # Funções dos botões da tela converter.
         self.tela_converter.botao_converter.clicked.connect(self.converter)
-        self.tela_converter.botao_voltar.clicked.connect(self.voltarTelaPrincipal)
-        self.tela_converter.botao_abrir_arquivo.clicked.connect(self.abrirArquivoConverter)
+        self.tela_converter.botao_voltar.clicked.connect(
+            self.voltarTelaPrincipal)
+        self.tela_converter.botao_abrir_arquivo.clicked.connect(
+            self.abrirArquivoConverter)
 
         # Funções dos botões da tela resultado.
         self.tela_resultado.bota_gerar_imagem.clicked.connect(self.salvarImgem)
-        self.tela_resultado.botao_salvar.clicked.connect(self.salvarResultadoTxt)
-        self.tela_resultado.botao_voltar.clicked.connect(self.abrirTelaComparacao)
+        self.tela_resultado.botao_salvar.clicked.connect(
+            self.salvarResultadoTxt)
+        self.tela_resultado.botao_voltar.clicked.connect(
+            self.abrirTelaComparacao)
 
         # Funções dos botões da tela do BLAST.
         self.Result = None
-        self.tela_blast.Alinhar.clicked.connect(self.tela_Filtro_Ali)
+        self.tela_blast.Alinhar.clicked.connect(self.launchPopup)
         self.CaminhoDiretorio = os.path.dirname(os.path.realpath(__file__))
         self.tela_blast.Voltar_Prin.clicked.connect(self.voltarTelaPrincipal)
         self.tela_filtros_blast.CaminhoDiretorio_funcao(self.CaminhoDiretorio)
-        self.tela_resultado_blast.Finalizar.clicked.connect(self.voltarTelaPrincipal)
-        self.tela_filtros_blast.pushButton_Voltar.clicked.connect(self.abrirTelaBlast)
-        self.tela_resultado_blast.Voltar.clicked.connect(self.tela_Botao_Voltar_Resul)
-        self.tela_filtros_blast.pushButton_Continuar.clicked.connect(self.resultadoBlast)
+        self.tela_resultado_blast.Finalizar.clicked.connect(
+            self.voltarTelaPrincipal)
+        self.tela_filtros_blast.pushButton_Voltar.clicked.connect(
+            self.abrirTelaBlast)
+        self.tela_resultado_blast.Voltar.clicked.connect(
+            self.tela_Botao_Voltar_Resul)
+        self.tela_filtros_blast.pushButton_Continuar.clicked.connect(
+            self.resultadoBlast)
+
+    def launchPopup(self):
+        self.type_blast = None
+        GUI = EmployeeDlg(self)
+        result = GUI.exec()
+        if (result):
+            self.tela_Filtro_Ali()
 
     def apagarValoresTelaComparacao(self):
         """
@@ -166,8 +194,7 @@ class Main(QMainWindow, Ui_Main):
         self.resultado_salvar = ''
         self.lista_salvar_resultado = []
 
-
-        self.algo_needle = algorithm_needleman('', '', None , None, None)
+        self.algo_needle = algorithm_needleman('', '', None, None, None)
 
         self.algo_water = algorithm_smith('', '', None, None, None)
 
@@ -175,7 +202,7 @@ class Main(QMainWindow, Ui_Main):
 
         self.lista_converter1 = []
         self.seq_converter1 = ''
-        self.string_converter1  = ''
+        self.string_converter1 = ''
         self.string_convertida1 = ''
 
         self.lista_converter2 = []
@@ -236,12 +263,13 @@ class Main(QMainWindow, Ui_Main):
             "Alinhar" da tela inicial do BLAST.
 
         """
-        self.Result = self.tela_blast.Alinhamento()
-        if self.Result != None:                                                 #Dependendo do resultado retornado pela função "Alinhamento", presente no arquivo tela_BLAST.py, o software irá trocar de tela indo para tela de filtros ou para tela de resultado caso seja None o resultado a tela inicial irá permanecer.
-            if (self.tela_blast.Tabular.isChecked()):                           #Se o usuario escolher que o resultado seja de forma Tabular, a proxima tela será a dos FILTROS.
+        self.Result = self.tela_blast.Alinhamento(type=self.type_blast)
+        if self.Result != None:  # Dependendo do resultado retornado pela função "Alinhamento", presente no arquivo tela_BLAST.py, o software irá trocar de tela indo para tela de filtros ou para tela de resultado caso seja None o resultado a tela inicial irá permanecer.
+            # Se o usuario escolher que o resultado seja de forma Tabular, a proxima tela será a dos FILTROS.
+            if (self.tela_blast.Tabular.isChecked() and self.type_blast=="blastn"):
                 self.tela_resultado_blast.resultadoFiltragem()
                 self.QtStack.setCurrentIndex(6)
-            else:                                                               #Se não for Tabular, a proxima tela será a de RESULTADOS.
+            else:  # Se não for Tabular, a proxima tela será a de RESULTADOS.
                 self.tela_resultado_blast.resultadoAlinhamento()
                 self.QtStack.setCurrentIndex(5)
 
@@ -256,7 +284,7 @@ class Main(QMainWindow, Ui_Main):
             do BLAST.
 
         """
-        if (self.tela_blast.Tabular.isChecked()):
+        if (self.tela_blast.Tabular.isChecked() and self.type_blast == "blastn"):
             self.QtStack.setCurrentIndex(6)
         else:
             self.QtStack.setCurrentIndex(4)
@@ -304,7 +332,8 @@ class Main(QMainWindow, Ui_Main):
             Função para abrir sequencia 1 e colocar na tela.
 
         """
-        self.seq1 = QFileDialog.getOpenFileName(self, 'Abrir sequencia 1', "", "Fasta Files (*.fasta *.fa)")
+        self.seq1 = QFileDialog.getOpenFileName(
+            self, 'Abrir sequencia 1', "", "Fasta Files (*.fasta *.fa)")
         if self.seq1[0]:
             f = open(self.seq1[0], 'r')
 
@@ -319,7 +348,8 @@ class Main(QMainWindow, Ui_Main):
             Função para abrir sequencia 2 e colocar na tela.
 
         """
-        self.seq2 = QFileDialog.getOpenFileName(self, 'Abrir sequencia 2', "", "Fasta Files (*.fasta *.fa)")
+        self.seq2 = QFileDialog.getOpenFileName(
+            self, 'Abrir sequencia 2', "", "Fasta Files (*.fasta *.fa)")
         if self.seq2[0]:
             f = open(self.seq2[0], 'r')
 
@@ -344,7 +374,8 @@ class Main(QMainWindow, Ui_Main):
             QMessageBox.about(self, 'Atenção', 'Selecione um arquivo')
 
         elif not self.validarNumero(match, mismatch, gap):
-            QMessageBox.about(self, 'Atenção', 'Preencha todos os campos somente com números!!')
+            QMessageBox.about(
+                self, 'Atenção', 'Preencha todos os campos somente com números!!')
 
         elif self.tela_comparacao.comboBox.currentText() == 'GLOBAL':
             self.comparacaoGlobal()
@@ -379,25 +410,25 @@ class Main(QMainWindow, Ui_Main):
         self.string_convertida2 = self.string_converter2[2:-2]
 
         self.algo_needle = algorithm_needleman(self.string_convertida1,
-                                                self.string_convertida2,
-                                                int(self.tela_comparacao.match.text()),
-                                                int(self.tela_comparacao.mismatch.text()),
-                                                int(self.tela_comparacao.gap.text()))
+                                               self.string_convertida2,
+                                               int(self.tela_comparacao.match.text()),
+                                               int(self.tela_comparacao.mismatch.text()),
+                                               int(self.tela_comparacao.gap.text()))
 
         self.algo_needle.needle()
         self.QtStack.setCurrentIndex(3)
 
         self.tela_resultado.setar_resultado.append('Identidade: ' + str(self.algo_needle.ident)[:5] + '\n' +
-                                                    'Score: ' + str(self.algo_needle.seq_score)[:5] + '\n' +
-                                                    'Sequencia 1: ' + self.algo_needle.align1 + '\n' +
-                                                    'Sym:                ' + self.algo_needle.sym + '\n' +
-                                                    'Sequencia 2: ' + self.algo_needle.align2)
+                                                   'Score: ' + str(self.algo_needle.seq_score)[:5] + '\n' +
+                                                   'Sequencia 1: ' + self.algo_needle.align1 + '\n' +
+                                                   'Sym:                ' + self.algo_needle.sym + '\n' +
+                                                   'Sequencia 2: ' + self.algo_needle.align2)
 
         self.lista_salvar_resultado.append('Identidade: ' + str(self.algo_needle.ident) + '\n' +
-                                                    'Score: ' + str(self.algo_needle.seq_score) + '\n' +
-                                                    'Sequencia 1: ' + self.algo_needle.align1 + '\n' +
-                                                    'Sym:         ' + self.algo_needle.sym + '\n' +
-                                                    'Sequencia 2: ' + self.algo_needle.align2)
+                                           'Score: ' + str(self.algo_needle.seq_score) + '\n' +
+                                           'Sequencia 1: ' + self.algo_needle.align1 + '\n' +
+                                           'Sym:         ' + self.algo_needle.sym + '\n' +
+                                           'Sequencia 2: ' + self.algo_needle.align2)
 
     def comparacaoLocal(self):
         """
@@ -426,25 +457,25 @@ class Main(QMainWindow, Ui_Main):
         self.string_convertida2 = self.string_converter2[2:-2]
 
         self.algo_water = algorithm_smith(self.string_convertida1,
-                                            self.string_convertida2,
-                                            int(self.tela_comparacao.match.text()),
-                                            int(self.tela_comparacao.mismatch.text()),
-                                            int(self.tela_comparacao.gap.text()))
+                                          self.string_convertida2,
+                                          int(self.tela_comparacao.match.text()),
+                                          int(self.tela_comparacao.mismatch.text()),
+                                          int(self.tela_comparacao.gap.text()))
 
         self.algo_water.water()
         self.QtStack.setCurrentIndex(3)
 
         self.tela_resultado.setar_resultado.append('Identidade: ' + str(self.algo_water.identity)[:5] + '\n' +
-                                                    'Score: ' + str(self.algo_water.max_score) + '\n' +
-                                                    'Sequencia 1: ' + self.algo_water.align1 + '\n' +
-                                                    'Sym:                ' + self.algo_water.sym + '\n' +
-                                                    'Sequencia 2: ' + self.algo_water.align2)
+                                                   'Score: ' + str(self.algo_water.max_score) + '\n' +
+                                                   'Sequencia 1: ' + self.algo_water.align1 + '\n' +
+                                                   'Sym:                ' + self.algo_water.sym + '\n' +
+                                                   'Sequencia 2: ' + self.algo_water.align2)
 
         self.lista_salvar_resultado.append('Identidade: ' + str(self.algo_water.identity)[:5] + '\n' +
-                                                    'Score: ' + str(self.algo_water.max_score) + '\n' +
-                                                    'Sequencia 1: ' + self.algo_water.align1 + '\n' +
-                                                    'Sym:         ' + self.algo_water.sym + '\n' +
-                                                    'Sequencia 2: ' + self.algo_water.align2)
+                                           'Score: ' + str(self.algo_water.max_score) + '\n' +
+                                           'Sequencia 1: ' + self.algo_water.align1 + '\n' +
+                                           'Sym:         ' + self.algo_water.sym + '\n' +
+                                           'Sequencia 2: ' + self.algo_water.align2)
 
     def validarNumero(self, match, mismatch, gap):
         """
@@ -471,7 +502,8 @@ class Main(QMainWindow, Ui_Main):
         -> tela_resultado.py
 
         """
-        self.resultado = QFileDialog.getSaveFileName(self, 'Salvar Resultado', '/home', "Text (*.txt *.asc)")
+        self.resultado = QFileDialog.getSaveFileName(
+            self, 'Salvar Resultado', '/home', "Text (*.txt *.asc)")
 
         if self.resultado[0]:
             self.resultado_salvar = open(self.resultado[0], 'w')
@@ -479,7 +511,7 @@ class Main(QMainWindow, Ui_Main):
                 self.resultado_salvar.writelines(self.lista_salvar_resultado)
                 self.resultado_salvar.close()
 
-        QMessageBox.about(self,'Atenção', 'Resultado Salvo')
+        QMessageBox.about(self, 'Atenção', 'Resultado Salvo')
 
     def salvarImgem(self):
         """
@@ -489,25 +521,29 @@ class Main(QMainWindow, Ui_Main):
         -> Função da pasta plotar.
 
         """
-        if(self.tela_comparacao.comboBox.currentText() == 'GLOBAL'):
-            img, _ = QFileDialog.getSaveFileName(self, 'Salvar Imagem', '/home', filter="PNG(*.png);; JPEG(*.jpg)")
-            self.create_image = criar_imagem(img, self.algo_needle.align1, self.algo_needle.align2, self.algo_needle.sym, str(self.algo_needle.ident), str(self.algo_needle.seq_score))
+        if (self.tela_comparacao.comboBox.currentText() == 'GLOBAL'):
+            img, _ = QFileDialog.getSaveFileName(
+                self, 'Salvar Imagem', '/home', filter="PNG(*.png);; JPEG(*.jpg)")
+            self.create_image = criar_imagem(img, self.algo_needle.align1, self.algo_needle.align2, self.algo_needle.sym, str(
+                self.algo_needle.ident), str(self.algo_needle.seq_score))
             if img[-3:] == "png":
                 self.create_image.salvarImage()
-                QMessageBox.about(self,'Atenção', 'Imagem Salva')
+                QMessageBox.about(self, 'Atenção', 'Imagem Salva')
             elif img[-3:] == "jpg":
                 self.create_image.salvarImage()
-                QMessageBox.about(self,'Atenção', 'Imagem Salva')
+                QMessageBox.about(self, 'Atenção', 'Imagem Salva')
 
         else:
-            img, _ = QFileDialog.getSaveFileName(self, 'Salvar Imagem', '/home', filter="PNG(*.png);; JPEG(*.jpg)")
-            self.create_image = criar_imagem(img, self.algo_water.align1, self.algo_water.align2, self.algo_water.sym, str(self.algo_water.identity), str(self.algo_water.max_score))
+            img, _ = QFileDialog.getSaveFileName(
+                self, 'Salvar Imagem', '/home', filter="PNG(*.png);; JPEG(*.jpg)")
+            self.create_image = criar_imagem(img, self.algo_water.align1, self.algo_water.align2, self.algo_water.sym, str(
+                self.algo_water.identity), str(self.algo_water.max_score))
             if img[-3:] == "png":
                 self.create_image.salvarImage()
-                QMessageBox.about(self,'Atenção', 'Imagem Salva')
+                QMessageBox.about(self, 'Atenção', 'Imagem Salva')
             elif img[-3:] == "jpg":
                 self.create_image.salvarImage()
-                QMessageBox.about(self,'Atenção', 'Imagem Salva')
+                QMessageBox.about(self, 'Atenção', 'Imagem Salva')
 
     def abrirArquivoConverter(self):
         """
@@ -517,7 +553,8 @@ class Main(QMainWindow, Ui_Main):
 
         """
         if self.tela_converter.comboBox.currentText() == 'GENBANK - FASTA':
-            self.gefasta = QFileDialog.getOpenFileName(self, 'Abrir sequencia', "", "Genbank Files (*.gbk)")
+            self.gefasta = QFileDialog.getOpenFileName(
+                self, 'Abrir sequencia', "", "Genbank Files (*.gbk)")
             if self.gefasta[0]:
                 f = open(self.gefasta[0], 'r')
 
@@ -525,7 +562,8 @@ class Main(QMainWindow, Ui_Main):
                     self.datage = f.read()
                     self.tela_converter.setar_sequencia.setText(self.datage)
         else:
-            self.fqfasta = QFileDialog.getOpenFileName(self, 'Abrir sequencia', "", "FastaQ Files (*.fastaq)")
+            self.fqfasta = QFileDialog.getOpenFileName(
+                self, 'Abrir sequencia', "", "FastaQ Files (*.fastaq)")
             if self.fqfasta[0]:
                 f = open(self.fqfasta[0], 'r')
 
@@ -544,26 +582,32 @@ class Main(QMainWindow, Ui_Main):
             QMessageBox.about(self, 'Atenção', 'Selecione um arquivo')
         else:
             if self.tela_converter.comboBox.currentText() == 'GENBANK - FASTA':
-                self.gefasta_salvar = QFileDialog.getSaveFileName(self, 'Salvar', "", "Fasta Files (*.fasta)")
+                self.gefasta_salvar = QFileDialog.getSaveFileName(
+                    self, 'Salvar', "", "Fasta Files (*.fasta)")
                 if self.gefasta_salvar[0] != '':
                     with open(self.gefasta[0], "r") as input_handle:
                         with open(self.gefasta_salvar[0], "w") as output_handle:
                             sequences = SeqIO.parse(input_handle, "genbank")
-                            count = SeqIO.write(sequences, output_handle, "fasta")
-                    QMessageBox.about(None,'Atenção', 'Sequência convertida')
+                            count = SeqIO.write(
+                                sequences, output_handle, "fasta")
+                    QMessageBox.about(None, 'Atenção', 'Sequência convertida')
                 else:
-                    QMessageBox.about(None,'Atenção', 'Sequência não convertida')
+                    QMessageBox.about(
+                        None, 'Atenção', 'Sequência não convertida')
                 self.apagarValoresTelaConverter()
             else:
-                self.fqfasta_salvar = QFileDialog.getSaveFileName(self, 'Salvar', "", "Fasta Files (*.fasta)")
+                self.fqfasta_salvar = QFileDialog.getSaveFileName(
+                    self, 'Salvar', "", "Fasta Files (*.fasta)")
                 if self.fqfasta_salvar[0] != '':
                     with open(self.fqfasta[0], "r") as input_handle:
                         with open(self.fqfasta_salvar[0], "w") as output_handle:
                             sequences = SeqIO.parse(input_handle, "fastq")
-                            count = SeqIO.write(sequences, output_handle, "fasta")
-                    QMessageBox.about(None,'Atenção', 'Sequência convertida')
+                            count = SeqIO.write(
+                                sequences, output_handle, "fasta")
+                    QMessageBox.about(None, 'Atenção', 'Sequência convertida')
                 else:
-                    QMessageBox.about(None,'Atenção', 'Sequência não convertida')
+                    QMessageBox.about(
+                        None, 'Atenção', 'Sequência não convertida')
                 self.apagarValoresTelaConverter()
 
     def fecharAplicacao(self):
@@ -573,6 +617,36 @@ class Main(QMainWindow, Ui_Main):
 
         """
         QCoreApplication.instance().quit()
+
+
+class EmployeeDlg(QDialog):
+    """Employee dialog."""
+
+    def __init__(self, ui_main, parent=None):
+        super().__init__(parent)
+        # Create an instance of the GUI
+        self.ui = Ui_Dialog_Custom()
+        self.ui_main = ui_main
+        # Run the .setupUi() method to show the GUI
+        self.ui.setupUi(self)
+        
+    def accept(self) -> None:
+        
+        if self.ui.radioButton_blastn.isChecked():
+            self.ui_main.type_blast = "blastn"
+        elif self.ui.radioButton_blastp.isChecked():
+            self.ui_main.type_blast = "blastp"
+        elif self.ui.radioButton_blastx.isChecked():
+            self.ui_main.type_blast = "blastx"
+        elif self.ui.radioButton_tblastx.isChecked():
+            self.ui_main.type_blast = "tblastx"
+        elif self.ui.radioButton_tblastn.isChecked():
+            self.ui_main.type_blast = "tblastn"
+        elif self.ui.radioButton_psiblast.isChecked():
+            self.ui_main.type_blast = "psiblast"
+        
+        return super().accept()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
