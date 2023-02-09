@@ -20,6 +20,10 @@ A ferramenta está desenvolvida na linguagem python, versão 3.0, e utiliza dive
 
        sudo apt install ncbi-blast+
 
+ - Instale algumas ferramentas do NCBI: (OPCIONAL)
+
+       sudo apt install ncbi-tools-bin
+
 -------
 
 ### Quickstart

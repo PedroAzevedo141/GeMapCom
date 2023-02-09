@@ -271,8 +271,9 @@ class Ui_tela_BLAST(object):
                 genoma inserido.
 
         '''
-        # Filename, _ = QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO QUERY", "", "Arquivo de Fasta (*.fasta *.fa)")
-        Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/seq1.fasta"
+        Filename, _ = QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO QUERY", "", "Arquivo de Fasta (*.fasta *.fa)")
+        # Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/seq1.fasta"
+        # Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/Yersinia-BLAST.fasta"
         if Filename:
             Name = []
             self.Query = Filename
@@ -291,8 +292,9 @@ class Ui_tela_BLAST(object):
                 genoma inserido.
 
         '''
-        # Filename, _ = QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO SUBJECT", "", "Arquivo de Fasta (*.fasta *.fa)")
-        Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/seq2.fasta"
+        Filename, _ = QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO SUBJECT", "", "Arquivo de Fasta (*.fasta *.fa)")
+        # Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/seq2.fasta"
+        # Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/Xanthomonas-BLAST.fasta"
         if Filename:
             Name = []
             self.Subject = Filename
