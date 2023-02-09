@@ -1,16 +1,9 @@
 from PySide6.QtWidgets import *
 from PySide6.QtGui import *
 from PySide6.QtCore import *
-import os
-import Bio
 import glob
 import warnings
-import numpy as np
 import pandas as pd
-from Bio import SeqIO
-import matplotlib.pyplot as plt
-warnings.filterwarnings("ignore")
-from matplotlib.lines import Line2D
 class Ui_tela_Filtros_BLAST(object):
     """
 
@@ -166,64 +159,6 @@ class Ui_tela_Filtros_BLAST(object):
 
         self.retranslateUi(Filtros)
         QMetaObject.connectSlotsByName(Filtros)
-
-    def CaminhoDiretorio_funcao(self, caminhoAlinhamento):
-        """
-
-            Função que busca o caminho do arquivo, no servidor do usuario, no
-            qual está o resultado do alinhamento realizado.
-
-            Parametro:
-                    caminhoAlinhamento (str): Uma string que contém o endereço do arquivo.
-
-            --> Função usada no GeMapCom.py
-
-        """
-        self.caminhoDiretorio = caminhoAlinhamento
-
-    def Filtragem(self):
-        """
-
-            Tem como funcionalidade realizar três tipos de filtragem, sendo eles:
-                - Filtro de identidade: Filtra de acordo com a identidade resultante
-                dos alinhamentos comparado com o valor inserido pelo usuario.
-                - Filtro do E-Value: Filtra de acordo com o E-Value resultante
-                dos alinhamentos comparado com o valor inserido pelo usuario.
-                - Filtro RAG: Filtragem pela Razão entre o Tamanho do Alinhamento e o
-                Tamanho do Gene (RAG)
-
-            Ao terminar de filtrar o alinhamento obtido, o resultado é colocado
-            em um novo arquivo, nomeado de "Filtragem.out", para ser ilustrado na
-            tela de resultados.
-
-            --> Função usada no GeMapCom.py
-
-        """
-        dir_path = self.caminhoDiretorio + "/ResultAlin.out"
-        files_align = glob.glob(dir_path)
-        alinhamentos = pd.read_csv(files_align[0],header=None,delimiter = '	')
-        # print('Alinhamentos da: {}'.format(len(alinhamentos)))
-        if self.checkBox_Identidade.isChecked():
-            genes_unicos = alinhamentos[1].unique()
-            t = alinhamentos[(alinhamentos[1]==genes_unicos[0])]
-            m = t[2].argmax()
-            t.loc[[m]]
-            for gu in genes_unicos[1:]:
-                t2 = alinhamentos[(alinhamentos[1]==gu)]
-                m = t2[2].argmax()
-                t2 = t2.loc[[m]]
-                t = t.append(t2)
-            alinhamentos = t
-            # print("Alinhamentos após filtro de identidade:", len(alinhamentos))
-        if self.checkBox_EValue.isChecked():
-            e = self.SpinBox_EValue.value()
-            alinhamentos = alinhamentos[alinhamentos[10] <= e]
-            # print("Alinhamentos após limiar do E-value:", len(alinhamentos))
-        if self.checkBox_RAG.isChecked():
-            pass
-        arquivo = open("Filtragem.out", "w")
-        arquivo.write(alinhamentos.to_string())
-        arquivo.close()
 
     def retranslateUi(self, Filtros):
         _translate = QCoreApplication.translate
