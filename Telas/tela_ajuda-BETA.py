@@ -1,5 +1,5 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.Qt import (Qt,QPixmap)
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.Qt import (Qt,QPixmap)
 
 class Ui_Tela_Ajuda(object):
     """
@@ -12,7 +12,7 @@ class Ui_Tela_Ajuda(object):
     """
     def setupUi(self, Tela_Ajuda):
         Tela_Ajuda.setObjectName("Tela_Ajuda")
-        Tela_Ajuda.resize(1276, 585)
+        Tela_Ajuda.resize(1000, 600)
         self.centralwidget = QtWidgets.QWidget(Tela_Ajuda)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)

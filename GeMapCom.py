@@ -3,13 +3,17 @@ import sys
 
 from PyQt5.QtCore import QCoreApplication
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
 
 from Bio import SeqIO
 
 from Plotar.main import criar_imagem
+
+from src.blast import funcBlast as blast
+from src.blast.result import resultBlast
+from src.blast.filtros import filtrosBlast
 
 from Telas.tela_BLAST import Ui_tela_BLAST
 from Telas.tela_principal import Ui_Tela_Principal
@@ -61,14 +65,14 @@ class Ui_Main(QWidget):
         self.tela_resultado = Ui_Tela_Resultado()
         self.tela_resultado.setupUi(self.stack3)
 
-        self.tela_blast = Ui_tela_BLAST()
-        self.tela_blast.setupUi(self.stack4)
+        self.tela_blast_1 = Ui_tela_BLAST()
+        self.tela_blast_1.setupUi(self.stack4)
 
-        self.tela_resultado_blast = Ui_tela_Resultado_BLAST()
-        self.tela_resultado_blast.setupUi(self.stack5)
+        self.tela_resultado_blast_1 = Ui_tela_Resultado_BLAST()
+        self.tela_resultado_blast_1.setupUi(self.stack5)
 
-        self.tela_filtros_blast = Ui_tela_Filtros_BLAST()
-        self.tela_filtros_blast.setupUi(self.stack6)
+        self.tela_filtros_blast_1 = Ui_tela_Filtros_BLAST()
+        self.tela_filtros_blast_1.setupUi(self.stack6)
 
         self.QtStack.addWidget(self.stack0)
         self.QtStack.addWidget(self.stack1)
@@ -77,7 +81,14 @@ class Ui_Main(QWidget):
         self.QtStack.addWidget(self.stack4)
         self.QtStack.addWidget(self.stack5)
         self.QtStack.addWidget(self.stack6)
-
+        
+        self.tela_blast = blast()
+        self.tela_resultado_blast = resultBlast()
+        self.tela_filtros_blast = filtrosBlast()
+        
+        self.tela_blast.initScreens(self)
+        self.tela_resultado_blast.initScreens(self)
+        self.tela_filtros_blast.initScreens(self)
 
 class Main(QMainWindow, Ui_Main):
     """
@@ -124,7 +135,7 @@ class Main(QMainWindow, Ui_Main):
         # Funções dos botões da tela principal.
         self.tela_principal.botao_sair.clicked.connect(self.fecharAplicacao)
         self.tela_principal.botao_tela_outras.clicked.connect(
-            self.abrirTelaBlast)
+            self.tela_filtros_blast.abrirTelaBlast)
         self.tela_principal.botao_tela_converter.clicked.connect(
             self.abrirTelaConverter)
         self.tela_principal.botao_tela_comparacao.clicked.connect(
@@ -156,25 +167,10 @@ class Main(QMainWindow, Ui_Main):
 
         # Funções dos botões da tela do BLAST.
         self.Result = None
-        self.tela_blast.Alinhar.clicked.connect(self.launchPopup)
         self.CaminhoDiretorio = os.path.dirname(os.path.realpath(__file__))
-        self.tela_blast.Voltar_Prin.clicked.connect(self.voltarTelaPrincipal)
+        self.tela_blast_1.Voltar_Prin.clicked.connect(self.voltarTelaPrincipal)
+        
         self.tela_filtros_blast.CaminhoDiretorio_funcao(self.CaminhoDiretorio)
-        self.tela_resultado_blast.Finalizar.clicked.connect(
-            self.voltarTelaPrincipal)
-        self.tela_filtros_blast.pushButton_Voltar.clicked.connect(
-            self.abrirTelaBlast)
-        self.tela_resultado_blast.Voltar.clicked.connect(
-            self.tela_Botao_Voltar_Resul)
-        self.tela_filtros_blast.pushButton_Continuar.clicked.connect(
-            self.resultadoBlast)
-
-    def launchPopup(self):
-        self.type_blast = None
-        GUI = EmployeeDlg(self)
-        result = GUI.exec()
-        if (result):
-            self.tela_Filtro_Ali()
 
     def apagarValoresTelaComparacao(self):
         """
@@ -218,32 +214,6 @@ class Main(QMainWindow, Ui_Main):
         """
         self.tela_converter.setar_sequencia.setText('')
 
-    def apagarValoresTelaBlast(self):
-        """
-
-            Função para apagar os valores da tela INICIAL do BLAST.
-
-        """
-        self.tela_blast.LineGAP.setText("2")
-        self.tela_blast.LineMATCH.setText("2")
-        self.tela_blast.LineMISMATCH.setText("-3")
-        self.tela_blast.NomeArquivoQUERY.clear()
-        self.tela_blast.CabecalhoArquivoQUERY.clear()
-        self.tela_blast.NomeArquivoSUBJECT.clear()
-        self.tela_blast.CabecalhoArquivoSUBJECT.clear()
-        self.tela_blast.Query = ''
-        self.tela_blast.Subject = ''
-
-    def apagarValoresTelaFiltros(self):
-        """
-
-            Função para apagar os valores da tela dos FILTROS do BLAST.
-
-        """
-        self.tela_filtros_blast.checkBox_Identidade.setChecked(False)
-        self.tela_filtros_blast.checkBox_EValue.setChecked(False)
-        self.tela_filtros_blast.checkBox_RAG.setChecked(False)
-
     def voltarTelaPrincipal(self):
         """
 
@@ -252,53 +222,9 @@ class Main(QMainWindow, Ui_Main):
         """
         self.apagarValoresTelaComparacao()
         self.apagarValoresTelaConverter()
-        self.apagarValoresTelaBlast()
+        self.tela_blast.apagarValoresTelaBlast()
 
         self.QtStack.setCurrentIndex(0)
-
-    def tela_Filtro_Ali(self):
-        """
-
-            Função para entrar na tela de FILTROS do BLAST, utilizando o botão
-            "Alinhar" da tela inicial do BLAST.
-
-        """
-        self.Result = self.tela_blast.Alinhamento(type=self.type_blast)
-        if self.Result != None:  # Dependendo do resultado retornado pela função "Alinhamento", presente no arquivo tela_BLAST.py, o software irá trocar de tela indo para tela de filtros ou para tela de resultado caso seja None o resultado a tela inicial irá permanecer.
-            # Se o usuario escolher que o resultado seja de forma Tabular, a proxima tela será a dos FILTROS.
-            if (self.tela_blast.Tabular.isChecked() and self.type_blast=="blastn"):
-                self.tela_resultado_blast.resultadoFiltragem()
-                self.QtStack.setCurrentIndex(6)
-            else:  # Se não for Tabular, a proxima tela será a de RESULTADOS.
-                self.tela_resultado_blast.resultadoAlinhamento()
-                self.QtStack.setCurrentIndex(5)
-
-    def tela_Botao_Voltar_Resul(self):
-        """
-
-            Função de funcionalidade do botão "Voltar" que está na tela de RESULTADOS
-            do BLAST, dependendo do tipo de saida do resultado o "Voltar" irá para
-            uma tela especifica, como os filtros só tem funcionalidade para as saídas
-            TABULAR, então, se o resultado for TABULAR, quando apertar o botão "Voltar"
-            irá para tela de filtros, caso não seja TABULAR a tela será a de INICIO
-            do BLAST.
-
-        """
-        if (self.tela_blast.Tabular.isChecked() and self.type_blast == "blastn"):
-            self.QtStack.setCurrentIndex(6)
-        else:
-            self.QtStack.setCurrentIndex(4)
-
-    def resultadoBlast(self):
-        """
-
-            Função para abrir a tela de resultados do BLAST contendo o resultado
-            apos as filtragens.
-
-        """
-        self.tela_filtros_blast.Filtragem()
-        self.tela_resultado_blast.resultadoFiltragem()
-        self.QtStack.setCurrentIndex(5)
 
     def abrirTelaComparacao(self):
         """
@@ -316,15 +242,6 @@ class Main(QMainWindow, Ui_Main):
 
         """
         self.QtStack.setCurrentIndex(2)
-
-    def abrirTelaBlast(self):
-        """
-
-            Função para abrir tela do INICIAL do BLAST.
-
-        """
-        self.apagarValoresTelaFiltros()
-        self.QtStack.setCurrentIndex(4)
 
     def abrirArquivo1(self):
         """
@@ -619,36 +536,7 @@ class Main(QMainWindow, Ui_Main):
         QCoreApplication.instance().quit()
 
 
-class EmployeeDlg(QDialog):
-    """Employee dialog."""
-
-    def __init__(self, ui_main, parent=None):
-        super().__init__(parent)
-        # Create an instance of the GUI
-        self.ui = Ui_Dialog_Custom()
-        self.ui_main = ui_main
-        # Run the .setupUi() method to show the GUI
-        self.ui.setupUi(self)
-        
-    def accept(self) -> None:
-        
-        if self.ui.radioButton_blastn.isChecked():
-            self.ui_main.type_blast = "blastn"
-        elif self.ui.radioButton_blastp.isChecked():
-            self.ui_main.type_blast = "blastp"
-        elif self.ui.radioButton_blastx.isChecked():
-            self.ui_main.type_blast = "blastx"
-        elif self.ui.radioButton_tblastx.isChecked():
-            self.ui_main.type_blast = "tblastx"
-        elif self.ui.radioButton_tblastn.isChecked():
-            self.ui_main.type_blast = "tblastn"
-        elif self.ui.radioButton_psiblast.isChecked():
-            self.ui_main.type_blast = "psiblast"
-        
-        return super().accept()
-
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     show_main = Main()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

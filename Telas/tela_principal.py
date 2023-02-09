@@ -1,6 +1,6 @@
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
 
 
 class Ui_Tela_Principal(object):
@@ -15,7 +15,7 @@ class Ui_Tela_Principal(object):
     def setupUi(self, Tela_Principal):
         Tela_Principal.setObjectName("Tela_Principal")
         Tela_Principal.setWindowModality(Qt.NonModal)
-        Tela_Principal.resize(922, 586)
+        Tela_Principal.resize(1000, 600)
         Tela_Principal.setAutoFillBackground(False)
         Tela_Principal.setToolButtonStyle(Qt.ToolButtonIconOnly)
         Tela_Principal.setTabShape(QTabWidget.Rounded)

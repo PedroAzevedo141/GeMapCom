@@ -1,6 +1,6 @@
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
 class Ui_tela_Resultado_BLAST(object):
     """
 
@@ -12,7 +12,7 @@ class Ui_tela_Resultado_BLAST(object):
     """
     def setupUi(self, Page_02):
         Page_02.setObjectName("Page_02")
-        Page_02.resize(922, 586)
+        Page_02.resize(1000, 600)
         Page_02.setDocumentMode(True)
         self.centralwidget = QWidget(Page_02)
         self.centralwidget.setObjectName("centralwidget")
@@ -57,32 +57,6 @@ class Ui_tela_Resultado_BLAST(object):
 
         self.retranslateUi(Page_02)
         QMetaObject.connectSlotsByName(Page_02)
-
-    def resultadoFiltragem(self):
-        """
-
-            Função que abre e lê o arquivo "Filtragem.out" e ilustra o mesmo na
-            tela.
-
-        """
-        Result = 'Filtragem.out'
-        f = open(Result, 'r')
-        file_text = f.read()
-        self.Saida.setText(file_text)
-        f.close()
-
-    def resultadoAlinhamento(self):
-        """
-
-            Função que abre e lê o arquivo "ResultAlin.out" e ilustra o mesmo na
-            tela.
-
-        """
-        Result = 'ResultAlin.out'
-        f = open(Result, 'r')
-        file_text = f.read()
-        self.Saida.setText(file_text)
-        f.close()
 
     def retranslateUi(self, Page_02):
         _translate = QCoreApplication.translate
