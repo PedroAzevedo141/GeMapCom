@@ -9,14 +9,26 @@ from src.blast.qDialogAlinhamento import EmployeeDlg
 class funcBlast():
     
     def initScreens(self, homeScreen) -> None:
+        self.Query = None
+        self.Subject = None
         self.homeScreen = homeScreen
         self.screenBlast = homeScreen.tela_blast_1
         self.QtStack = homeScreen.QtStack
         self.screenBlast.ButtonQuery.clicked.connect(self.primeiroArquivo)
         self.screenBlast.ButtonSubject.clicked.connect(self.segundoArquivo)
-        self.screenBlast.Alinhar.clicked.connect(self.launchPopup)
-    
-    
+        self.screenBlast.Alinhar.clicked.connect(self.alingCheck)
+        
+    def alingCheck(self):
+        if self.Query != None:
+            if self.Subject != None:
+                self.launchPopup()
+            else:
+                QMessageBox.about(None, "BLAST",
+                                  "Informe o Subject para prosseguir com o alinhamento.")
+        else:
+            QMessageBox.about(None, "BLAST",
+                              "Informe o Query para prosseguir com o alinhamento.")
+        
     def ChecagemCheckBox(self):
         '''
 
