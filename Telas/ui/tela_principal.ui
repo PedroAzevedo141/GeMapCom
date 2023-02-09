@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>922</width>
-    <height>586</height>
+    <width>1000</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,30 +26,53 @@
    <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="2" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="6" column="0">
-       <widget class="QPushButton" name="botao_sair">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="lineWidth">
+           <number>4</number>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:48pt; font-weight:600;&quot;&gt;GeMapCom&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="botao_tela_comparacao">
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="text">
-         <string>SAIR</string>
+         <string>COMPARAR SEQUENCIAS</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="botao_tela_converter">
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="text">
-         <string>CONVERTER SEQUENCIA</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -60,12 +83,22 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>5</height>
+          <height>13</height>
          </size>
         </property>
        </spacer>
       </item>
-      <item row="3" column="0">
+      <item>
+       <widget class="QPushButton" name="botao_tela_converter">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>CONVERTER SEQUENCIA</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer_2">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -76,32 +109,22 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>5</height>
+          <height>13</height>
          </size>
         </property>
        </spacer>
       </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="botao_tela_comparacao">
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="text">
-         <string>COMPARAR SEQUENCIAS</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
+      <item>
        <widget class="QPushButton" name="botao_tela_outras">
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="text">
-         <string>OUTRAS FERRAMENTAS</string>
+         <string>BLAST+</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
+      <item>
        <spacer name="verticalSpacer_3">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -112,59 +135,61 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>5</height>
+          <height>13</height>
          </size>
         </property>
        </spacer>
       </item>
-     </layout>
-    </item>
-    <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label">
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Sunken</enum>
-        </property>
-        <property name="lineWidth">
-         <number>4</number>
-        </property>
-        <property name="midLineWidth">
-         <number>0</number>
+       <widget class="QPushButton" name="botao_tela_outras_2">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:48pt; font-weight:600;&quot;&gt;GeMapCom&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>OUTRAS FERRAMENTAS</string>
         </property>
-        <property name="textFormat">
-         <enum>Qt::AutoText</enum>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>13</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="botao_sair">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>SAIR</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <item row="1" column="0">
-     <widget class="Line" name="line">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>922</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
