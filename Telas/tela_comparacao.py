@@ -1,6 +1,6 @@
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
 
 class Ui_Tela_Comparacao(object):
     """
@@ -13,7 +13,7 @@ class Ui_Tela_Comparacao(object):
     """
     def setupUi(self, Tela_Comparacao):
         Tela_Comparacao.setObjectName("Tela_Comparacao")
-        Tela_Comparacao.resize(922, 586)
+        Tela_Comparacao.resize(1000, 600)
         self.centralwidget = QWidget(Tela_Comparacao)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)

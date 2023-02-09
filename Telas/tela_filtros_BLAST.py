@@ -1,6 +1,6 @@
-from PySide2.QtWidgets import *
-from PySide2.QtGui import *
-from PySide2.QtCore import *
+from PySide6.QtWidgets import *
+from PySide6.QtGui import *
+from PySide6.QtCore import *
 import os
 import Bio
 import glob
@@ -22,7 +22,7 @@ class Ui_tela_Filtros_BLAST(object):
     """
     def setupUi(self, Filtros):
         Filtros.setObjectName("Filtros")
-        Filtros.resize(922, 586)
+        Filtros.resize(1000, 600)
         Filtros.setMaximumSize(QSize(16777215, 16777215))
         self.centralwidget = QWidget(Filtros)
         self.centralwidget.setObjectName("centralwidget")

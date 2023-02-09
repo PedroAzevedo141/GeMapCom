@@ -1,8 +1,8 @@
 import os
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
 
 
 class Ui_tela_BLAST(object):
@@ -17,8 +17,8 @@ class Ui_tela_BLAST(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(922, 586)
-        MainWindow.setFixedSize(922, 586)
+        MainWindow.resize(1000, 600)
+        MainWindow.setFixedSize(1000, 600)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)
@@ -40,7 +40,7 @@ class Ui_tela_BLAST(object):
         font.setPointSize(40)
         font.setBold(True)
         font.setUnderline(True)
-        font.setWeight(75)
+        # font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setFrameShape(QFrame.Box)
         self.label_3.setFrameShadow(QFrame.Sunken)
@@ -271,9 +271,9 @@ class Ui_tela_BLAST(object):
                 genoma inserido.
 
         '''
-        Filename, _ = QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO QUERY", "", "Arquivo de Fasta (*.fasta *.fa)")
+        # Filename, _ = QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO QUERY", "", "Arquivo de Fasta (*.fasta *.fa)")
         # Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/seq1.fasta"
-        # Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/Yersinia-BLAST.fasta"
+        Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/Yersinia-BLAST.fasta"
         if Filename:
             Name = []
             self.Query = Filename
@@ -292,9 +292,9 @@ class Ui_tela_BLAST(object):
                 genoma inserido.
 
         '''
-        Filename, _ = QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO SUBJECT", "", "Arquivo de Fasta (*.fasta *.fa)")
+        # Filename, _ = QFileDialog.getOpenFileName(None, "SELECIONE O ARQUIVO SUBJECT", "", "Arquivo de Fasta (*.fasta *.fa)")
         # Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/seq2.fasta"
-        # Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/Xanthomonas-BLAST.fasta"
+        Filename = "/home/pedroazevedo141/repositories/GeMapCom/Primeiro_Uso/Xanthomonas-BLAST.fasta"
         if Filename:
             Name = []
             self.Subject = Filename

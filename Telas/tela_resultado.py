@@ -1,6 +1,6 @@
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
 
 class Ui_Tela_Resultado(object):
     """
@@ -13,7 +13,7 @@ class Ui_Tela_Resultado(object):
     """
     def setupUi(self, Tela_Resultado):
         Tela_Resultado.setObjectName("Tela_Resultado")
-        Tela_Resultado.resize(922, 586)
+        Tela_Resultado.resize(1000, 600)
         self.centralwidget = QWidget(Tela_Resultado)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)
