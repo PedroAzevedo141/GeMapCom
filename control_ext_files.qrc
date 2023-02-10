@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/Gemapcom.png</file>
+        <file>images/Gemapcom_banner.png</file>
+    </qresource>
+</RCC>

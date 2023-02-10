@@ -29,27 +29,36 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QLabel" name="label">
           <property name="frameShape">
-           <enum>QFrame::Box</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Sunken</enum>
           </property>
           <property name="lineWidth">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="midLineWidth">
            <number>0</number>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:48pt; font-weight:600;&quot;&gt;GeMapCom&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string/>
           </property>
           <property name="textFormat">
            <enum>Qt::AutoText</enum>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="../../control_ext_files.qrc">:/images/Gemapcom_banner.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -191,6 +200,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../control_ext_files.qrc"/>
+ </resources>
  <connections/>
 </ui>
