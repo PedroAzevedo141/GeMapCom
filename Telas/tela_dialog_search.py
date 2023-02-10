@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-# Form generated from reading UI file 'tela_dialog_searchSyizTw.ui'
+# Form generated from reading UI file 'tela_dialog_searchXBOQie.ui'
 ##
 # Created by: Qt User Interface Compiler version 5.15.3
 ##
@@ -70,6 +70,12 @@ class Ui_DialogSearch(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.radioButton_nucleotide = QRadioButton(DialogSearch)
+        self.radioButton_nucleotide.setObjectName(u"radioButton_nucleotide")
+        self.radioButton_nucleotide.setChecked(True)
+
+        self.horizontalLayout.addWidget(self.radioButton_nucleotide)
+
         self.radioButton_pubmed = QRadioButton(DialogSearch)
         self.radioButton_pubmed.setObjectName(u"radioButton_pubmed")
 
@@ -79,11 +85,6 @@ class Ui_DialogSearch(object):
         self.radioButton_protein.setObjectName(u"radioButton_protein")
 
         self.horizontalLayout.addWidget(self.radioButton_protein)
-
-        self.radioButton_nucleotide = QRadioButton(DialogSearch)
-        self.radioButton_nucleotide.setObjectName(u"radioButton_nucleotide")
-
-        self.horizontalLayout.addWidget(self.radioButton_nucleotide)
 
         self.verticalLayout_3.addLayout(self.horizontalLayout)
 
@@ -195,12 +196,12 @@ class Ui_DialogSearch(object):
             "DialogSearch", u"Informe seu e-mail:", None))
         self.label_email_2.setText(QCoreApplication.translate(
             "DialogSearch", u"Informe o database:", None))
+        self.radioButton_nucleotide.setText(
+            QCoreApplication.translate("DialogSearch", u"Nucleotide", None))
         self.radioButton_pubmed.setText(
             QCoreApplication.translate("DialogSearch", u"PubMed", None))
         self.radioButton_protein.setText(
             QCoreApplication.translate("DialogSearch", u"Protein", None))
-        self.radioButton_nucleotide.setText(
-            QCoreApplication.translate("DialogSearch", u"Nucleotide", None))
         self.radioButton_cancerchromosomes.setText(
             QCoreApplication.translate("DialogSearch", u"Cancer Chromosomes", None))
         self.radioButton_ncbisearch.setText(

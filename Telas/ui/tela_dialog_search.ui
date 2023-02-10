@@ -88,6 +88,16 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
+            <widget class="QRadioButton" name="radioButton_nucleotide">
+             <property name="text">
+              <string>Nucleotide</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QRadioButton" name="radioButton_pubmed">
              <property name="text">
               <string>PubMed</string>
@@ -98,13 +108,6 @@
             <widget class="QRadioButton" name="radioButton_protein">
              <property name="text">
               <string>Protein</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="radioButton_nucleotide">
-             <property name="text">
-              <string>Nucleotide</string>
              </property>
             </widget>
            </item>

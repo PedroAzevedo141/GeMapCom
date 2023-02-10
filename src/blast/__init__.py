@@ -4,10 +4,12 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
+from src.blast.searchAlign import EmployeeSearch
 from src.blast.qDialogAlinhamento import EmployeeDlg
 
+
 class funcBlast():
-    
+
     def initScreens(self, homeScreen) -> None:
         self.Query = None
         self.Subject = None
@@ -16,8 +18,10 @@ class funcBlast():
         self.QtStack = homeScreen.QtStack
         self.screenBlast.ButtonQuery.clicked.connect(self.primeiroArquivo)
         self.screenBlast.ButtonSubject.clicked.connect(self.segundoArquivo)
+        self.screenBlast.ButtomSearchQuery.clicked.connect(self.launchPopup_query)
+        self.screenBlast.ButtomSearchSubject.clicked.connect(self.launchPopup_subject)
         self.screenBlast.Alinhar.clicked.connect(self.alingCheck)
-        
+
     def alingCheck(self):
         if self.Query != None:
             if self.Subject != None:
@@ -28,7 +32,7 @@ class funcBlast():
         else:
             QMessageBox.about(None, "BLAST",
                               "Informe o Query para prosseguir com o alinhamento.")
-        
+
     def ChecagemCheckBox(self):
         '''
 
@@ -143,18 +147,28 @@ class funcBlast():
             isempty = file.tell() == 0
             file.seek(0)    # rebobinar o arquivo
         return isempty
-    
+
     def launchPopup(self):
         self.type_blast = None
         GUI = EmployeeDlg(self)
         if (GUI.exec()):
             self.tela_Filtro_Ali()
             
+    def launchPopup_query(self):
+        self.type_blast = None
+        GUI = EmployeeSearch(self.screenBlast, self, "query_file","query")
+        GUI.exec()
+            
+    def launchPopup_subject(self):
+        self.type_blast = None
+        GUI = EmployeeSearch(self.screenBlast, self, "subject_file", "subject")
+        GUI.exec()
+
     def tabularCheck(self):
         if (self.screenBlast.Tabular.isChecked() and self.type_blast == "blastn"):
             return True
         return False
-            
+
     def tela_Filtro_Ali(self):
         """
 
