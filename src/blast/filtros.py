@@ -7,16 +7,19 @@ from PySide6.QtWidgets import *
 from PySide6.QtGui import *
 from PySide6.QtCore import *
 
+
 class filtrosBlast:
-    
+
     def initScreens(self, homeScreen) -> None:
         self.homeScreen = homeScreen
         self.screenResult = homeScreen.tela_resultado_blast
         self.screenFiltros_ui = homeScreen.tela_filtros_blast_1
-        
-        self.screenFiltros_ui.pushButton_Voltar.clicked.connect(self.abrirTelaBlast)
-        self.screenFiltros_ui.pushButton_Continuar.clicked.connect(self.resultadoBlast)
-        
+
+        self.screenFiltros_ui.pushButton_Voltar.clicked.connect(
+            self.abrirTelaBlast)
+        self.screenFiltros_ui.pushButton_Continuar.clicked.connect(
+            self.resultadoBlast)
+
     def resultadoBlast(self):
         """
 
@@ -27,7 +30,7 @@ class filtrosBlast:
         self.Filtragem()
         self.screenResult.resultadoFiltragem()
         self.homeScreen.QtStack.setCurrentIndex(5)
-        
+
     def apagarValoresTelaFiltros(self):
         """
 
@@ -37,7 +40,7 @@ class filtrosBlast:
         self.screenFiltros_ui.checkBox_Identidade.setChecked(False)
         self.screenFiltros_ui.checkBox_EValue.setChecked(False)
         self.screenFiltros_ui.checkBox_RAG.setChecked(False)
-        
+
     def abrirTelaBlast(self):
         """
 
@@ -46,7 +49,7 @@ class filtrosBlast:
         """
         self.apagarValoresTelaFiltros()
         self.homeScreen.QtStack.setCurrentIndex(4)
-        
+
     def CaminhoDiretorio_funcao(self, caminhoAlinhamento):
         """
 
@@ -80,17 +83,22 @@ class filtrosBlast:
 
         """
         dir_path = self.caminhoDiretorio + "/ResultAlin.out"
-        print(dir_path)
         files_align = glob.glob(dir_path)
-        self.alinhamentos = pd.read_csv(files_align[0], header=None, delimiter='	')
+        self.alinhamentos = pd.read_csv(
+            files_align[0], header=None, delimiter='	')
         # print('Alinhamentos da: {}'.format(len(alinhamentos)))
-        if self.screenFiltros_ui.checkBox_Identidade.isChecked():
-            self.filtroIdentidade()
-        if self.screenFiltros_ui.checkBox_EValue.isChecked():
-            self.filtroEValue()
-        if self.screenFiltros_ui.checkBox_RAG.isChecked():
-            pass
-        
+        if self.screenFiltros_ui.checkBox_Identidade.isChecked() or self.screenFiltros_ui.checkBox_EValue.isChecked() or self.screenFiltros_ui.checkBox_RAG.isChecked():
+            if self.screenFiltros_ui.checkBox_Identidade.isChecked():
+                self.filtroIdentidade()
+            if self.screenFiltros_ui.checkBox_EValue.isChecked():
+                self.filtroEValue()
+            if self.screenFiltros_ui.checkBox_RAG.isChecked():
+                pass
+        else:
+            arquivo = open("Filtragem.out", "w")
+            arquivo.write(self.alinhamentos.to_string())
+            arquivo.close()
+
     def filtroRAG(self):
         pass
         # limiar = self.screenFiltros_ui.SpinBox_RAG.value()
@@ -111,7 +119,7 @@ class filtrosBlast:
         #         cont_limiar += 1
         # print("Alinhamentos após limiar da razao alinhamento/gene:", len(t))
         # return t, razao
-        
+
     def filtroIdentidade(self):
         genes_unicos = self.alinhamentos[1].unique()
         t = self.alinhamentos[(self.alinhamentos[1] == genes_unicos[0])]
@@ -124,16 +132,16 @@ class filtrosBlast:
             t = t.append(t2)
         self.alinhamentos = t
         # print("Alinhamentos após filtro de identidade:", len(self.alinhamentos))
-        
+
         arquivo = open("Filtragem.out", "w")
         arquivo.write(self.alinhamentos.to_string())
         arquivo.close()
-        
+
     def filtroEValue(self):
         e = self.screenFiltros_ui.SpinBox_EValue.value()
         self.alinhamentos = self.alinhamentos[self.alinhamentos[10] <= e]
         # print("Alinhamentos após limiar do E-value:", len(self.alinhamentos))
-        
+
         arquivo = open("Filtragem.out", "w")
         arquivo.write(self.alinhamentos.to_string())
         arquivo.close()
