@@ -6,6 +6,7 @@ from PySide6.QtWidgets import *
 
 from src.blast.searchAlign import EmployeeSearch
 from src.blast.qDialogAlinhamento import EmployeeDlg
+from .graphKablammo import kablammoBlast
 
 
 class funcBlast():
@@ -152,7 +153,7 @@ class funcBlast():
         self.type_blast = None
         GUI = EmployeeDlg(self)
         if (GUI.exec()):
-            self.tela_Filtro_Ali()
+            self.nextScreen()
             
     def launchPopup_query(self):
         self.type_blast = None
@@ -168,8 +169,13 @@ class funcBlast():
         if (self.screenBlast.Tabular.isChecked() and self.type_blast == "blastn"):
             return True
         return False
+    
+    def xmlCheck(self):
+        if (self.screenBlast.XML.isChecked() and self.type_blast == "blastn"):
+            return True
+        return False
 
-    def tela_Filtro_Ali(self):
+    def nextScreen(self):
         """
 
             Função para entrar na tela de FILTROS do BLAST, utilizando o botão
@@ -182,6 +188,9 @@ class funcBlast():
             if (self.tabularCheck()):
                 self.homeScreen.tela_resultado_blast.resultadoFiltragem()
                 self.QtStack.setCurrentIndex(6)
+            elif (self.xmlCheck()):
+                self.homeScreen.tela_resultado_qWebView.abrirQWebView()
+                self.QtStack.setCurrentIndex(7)
             else:  # Se não for Tabular, a proxima tela será a de RESULTADOS.
                 self.homeScreen.tela_resultado_blast.resultadoAlinhamento()
                 self.QtStack.setCurrentIndex(5)

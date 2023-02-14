@@ -8,6 +8,7 @@ from PySide6.QtWidgets import *
 from Bio import SeqIO
 
 from Plotar.main import criar_imagem
+from src.blast.graphKablammo import kablammoBlast
 
 from src.blast import funcBlast as blast
 from src.blast.result import resultBlast
@@ -20,6 +21,7 @@ from Telas.tela_resultado import Ui_Tela_Resultado
 from Telas.tela_comparacao import Ui_Tela_Comparacao
 from Telas.tela_filtros_BLAST import Ui_tela_Filtros_BLAST
 from Telas.tela_resultado_BLAST import Ui_tela_Resultado_BLAST
+from Telas.tela_QWebView import Ui_telaQWebView
 from Telas.qDialogBlast import Ui_Dialog_Custom
 
 from Algoritmos.algorithm_smith_waterman import algorithm_smith
@@ -50,6 +52,7 @@ class Ui_Main(QWidget):
         self.stack4 = QMainWindow()
         self.stack5 = QMainWindow()
         self.stack6 = QMainWindow()
+        self.stack7 = QMainWindow()
 
         self.tela_principal = Ui_Tela_Principal()
         self.tela_principal.setupUi(self.stack0)
@@ -71,6 +74,9 @@ class Ui_Main(QWidget):
 
         self.tela_filtros_blast_1 = Ui_tela_Filtros_BLAST()
         self.tela_filtros_blast_1.setupUi(self.stack6)
+        
+        self.telaQWebView_1 = Ui_telaQWebView()
+        self.telaQWebView_1.setupUi(self.stack7)
 
         self.QtStack.addWidget(self.stack0)
         self.QtStack.addWidget(self.stack1)
@@ -79,14 +85,17 @@ class Ui_Main(QWidget):
         self.QtStack.addWidget(self.stack4)
         self.QtStack.addWidget(self.stack5)
         self.QtStack.addWidget(self.stack6)
+        self.QtStack.addWidget(self.stack7)
         
         self.tela_blast = blast()
         self.tela_resultado_blast = resultBlast()
         self.tela_filtros_blast = filtrosBlast()
+        self.tela_resultado_qWebView = kablammoBlast()
         
         self.tela_blast.initScreens(self)
         self.tela_resultado_blast.initScreens(self)
         self.tela_filtros_blast.initScreens(self)
+        self.tela_resultado_qWebView.initScreens(self)
 
 class Main(QMainWindow, Ui_Main):
     """
