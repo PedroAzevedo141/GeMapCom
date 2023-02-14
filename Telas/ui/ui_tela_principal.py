@@ -1,26 +1,31 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-# Form generated from reading UI file 'tela_principalwDgQqu.ui'
+## Form generated from reading UI file 'tela_principal.ui'
 ##
-# Created by: Qt User Interface Compiler version 5.15.3
+## Created by: Qt User Interface Compiler version 6.4.2
 ##
-# WARNING! All changes made in this file will be lost when recompiling UI file!
+## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtGui import *
-from PySide6.QtCore import *
-from PySide6.QtWidgets import *
-
-import rc_control_ext_files
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QLabel,
+    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
+    QStatusBar, QTabWidget, QVBoxLayout, QWidget)
+import control_ext_files_rc
 
 class Ui_Tela_Principal(object):
     def setupUi(self, Tela_Principal):
         if not Tela_Principal.objectName():
             Tela_Principal.setObjectName(u"Tela_Principal")
         Tela_Principal.setWindowModality(Qt.NonModal)
-        Tela_Principal.resize(1000, 600)
+        Tela_Principal.resize(1018, 678)
         Tela_Principal.setAutoFillBackground(False)
         Tela_Principal.setToolButtonStyle(Qt.ToolButtonIconOnly)
         Tela_Principal.setTabShape(QTabWidget.Rounded)
@@ -41,6 +46,7 @@ class Ui_Tela_Principal(object):
 
         self.verticalLayout.addWidget(self.label)
 
+
         self.verticalLayout_2.addLayout(self.verticalLayout)
 
         self.line = QFrame(self.centralwidget)
@@ -56,8 +62,7 @@ class Ui_Tela_Principal(object):
 
         self.verticalLayout_2.addWidget(self.botao_tela_comparacao)
 
-        self.verticalSpacer = QSpacerItem(
-            20, 13, QSizePolicy.Minimum, QSizePolicy.Maximum)
+        self.verticalSpacer = QSpacerItem(20, 13, QSizePolicy.Minimum, QSizePolicy.Maximum)
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
 
@@ -67,8 +72,7 @@ class Ui_Tela_Principal(object):
 
         self.verticalLayout_2.addWidget(self.botao_tela_converter)
 
-        self.verticalSpacer_2 = QSpacerItem(
-            20, 13, QSizePolicy.Minimum, QSizePolicy.Maximum)
+        self.verticalSpacer_2 = QSpacerItem(20, 13, QSizePolicy.Minimum, QSizePolicy.Maximum)
 
         self.verticalLayout_2.addItem(self.verticalSpacer_2)
 
@@ -78,8 +82,7 @@ class Ui_Tela_Principal(object):
 
         self.verticalLayout_2.addWidget(self.botao_tela_outras)
 
-        self.verticalSpacer_3 = QSpacerItem(
-            20, 13, QSizePolicy.Minimum, QSizePolicy.Maximum)
+        self.verticalSpacer_3 = QSpacerItem(20, 13, QSizePolicy.Minimum, QSizePolicy.Maximum)
 
         self.verticalLayout_2.addItem(self.verticalSpacer_3)
 
@@ -89,8 +92,7 @@ class Ui_Tela_Principal(object):
 
         self.verticalLayout_2.addWidget(self.botao_tela_outras_2)
 
-        self.verticalSpacer_4 = QSpacerItem(
-            20, 13, QSizePolicy.Minimum, QSizePolicy.Maximum)
+        self.verticalSpacer_4 = QSpacerItem(20, 13, QSizePolicy.Minimum, QSizePolicy.Maximum)
 
         self.verticalLayout_2.addItem(self.verticalSpacer_4)
 
@@ -101,6 +103,7 @@ class Ui_Tela_Principal(object):
         self.botao_sair.setFlat(False)
 
         self.verticalLayout_2.addWidget(self.botao_sair)
+
 
         self.gridLayout.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
 
@@ -113,21 +116,17 @@ class Ui_Tela_Principal(object):
 
         self.botao_sair.setDefault(False)
 
+
         QMetaObject.connectSlotsByName(Tela_Principal)
     # setupUi
 
     def retranslateUi(self, Tela_Principal):
-        Tela_Principal.setWindowTitle(QCoreApplication.translate(
-            "Tela_Principal", u"Tela Inicial - GeMapCom", None))
+        Tela_Principal.setWindowTitle(QCoreApplication.translate("Tela_Principal", u"Tela Inicial - GeMapCom", None))
         self.label.setText("")
-        self.botao_tela_comparacao.setText(QCoreApplication.translate(
-            "Tela_Principal", u"COMPARAR SEQUENCIAS", None))
-        self.botao_tela_converter.setText(QCoreApplication.translate(
-            "Tela_Principal", u"CONVERTER SEQUENCIA", None))
-        self.botao_tela_outras.setText(
-            QCoreApplication.translate("Tela_Principal", u"BLAST+", None))
-        self.botao_tela_outras_2.setText(QCoreApplication.translate(
-            "Tela_Principal", u"OUTRAS FERRAMENTAS", None))
-        self.botao_sair.setText(QCoreApplication.translate(
-            "Tela_Principal", u"SAIR", None))
+        self.botao_tela_comparacao.setText(QCoreApplication.translate("Tela_Principal", u"COMPARAR SEQUENCIAS", None))
+        self.botao_tela_converter.setText(QCoreApplication.translate("Tela_Principal", u"CONVERTER SEQUENCIA", None))
+        self.botao_tela_outras.setText(QCoreApplication.translate("Tela_Principal", u"BLAST+", None))
+        self.botao_tela_outras_2.setText(QCoreApplication.translate("Tela_Principal", u"OUTRAS FERRAMENTAS", None))
+        self.botao_sair.setText(QCoreApplication.translate("Tela_Principal", u"SAIR", None))
     # retranslateUi
+

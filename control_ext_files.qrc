@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>images/Gemapcom.png</file>
         <file>images/Gemapcom_banner.png</file>
+        <file>images/Gemapcom_banner_2.png</file>
+        <file>images/Gemapcom_banner_3.png</file>
+        <file>images/Gemapcom_banner_blast.png</file>
     </qresource>
 </RCC>

@@ -1,19 +1,25 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-# Form generated from reading UI file 'tela_BLASTbWNGKw.ui'
+## Form generated from reading UI file 'tela_BLAST.ui'
 ##
-# Created by: Qt User Interface Compiler version 5.15.3
+## Created by: Qt User Interface Compiler version 6.4.2
 ##
-# WARNING! All changes made in this file will be lost when recompiling UI file!
+## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtWidgets import *
-from PySide6.QtGui import *
-from PySide6.QtCore import *
-
-import rc_control_ext_files
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QRadioButton, QScrollArea, QSizePolicy, QStatusBar,
+    QVBoxLayout, QWidget)
+import control_ext_files_rc
 
 class Ui_tela_BLAST(object):
     def setupUi(self, tela_BLAST):
@@ -23,8 +29,7 @@ class Ui_tela_BLAST(object):
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            tela_BLAST.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(tela_BLAST.sizePolicy().hasHeightForWidth())
         tela_BLAST.setSizePolicy(sizePolicy)
         self.centralwidget = QWidget(tela_BLAST)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -44,14 +49,14 @@ class Ui_tela_BLAST(object):
 
         self.horizontalLayout.addWidget(self.Alinhar)
 
+
         self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
 
         self.scrollArea = QScrollArea(self.centralwidget)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
-        self.scrollAreaWidgetContents.setObjectName(
-            u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
         self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1000, 525))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_2.setSpacing(10)
@@ -62,8 +67,7 @@ class Ui_tela_BLAST(object):
         sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(
-            self.frame.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
         self.frame.setSizePolicy(sizePolicy1)
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
@@ -85,6 +89,7 @@ class Ui_tela_BLAST(object):
         self.MISMATCH.setObjectName(u"MISMATCH")
 
         self.verticalLayout_2.addWidget(self.MISMATCH)
+
 
         self.gridLayout_3.addLayout(self.verticalLayout_2, 1, 0, 1, 1)
 
@@ -114,6 +119,7 @@ class Ui_tela_BLAST(object):
 
         self.verticalLayout.addWidget(self.LineMISMATCH)
 
+
         self.gridLayout_3.addLayout(self.verticalLayout, 1, 1, 1, 1)
 
         self.Parametros = QLabel(self.frame)
@@ -121,11 +127,11 @@ class Ui_tela_BLAST(object):
         sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(
-            self.Parametros.sizePolicy().hasHeightForWidth())
+        sizePolicy2.setHeightForWidth(self.Parametros.sizePolicy().hasHeightForWidth())
         self.Parametros.setSizePolicy(sizePolicy2)
 
         self.gridLayout_3.addWidget(self.Parametros, 0, 0, 1, 1)
+
 
         self.gridLayout_2.addWidget(self.frame, 3, 0, 1, 1)
 
@@ -135,7 +141,6 @@ class Ui_tela_BLAST(object):
         font.setPointSize(40)
         font.setBold(True)
         font.setUnderline(True)
-        font.setWeight(QFont.Bold)
         self.label_3.setFont(font)
         self.label_3.setFrameShape(QFrame.Box)
         self.label_3.setFrameShadow(QFrame.Sunken)
@@ -229,6 +234,7 @@ class Ui_tela_BLAST(object):
 
         self.gridLayout_5.addWidget(self.Tabular, 1, 1, 1, 1)
 
+
         self.gridLayout_2.addWidget(self.frame_3, 3, 1, 1, 2)
 
         self.frame_2 = QFrame(self.scrollAreaWidgetContents)
@@ -255,6 +261,7 @@ class Ui_tela_BLAST(object):
 
         self.verticalLayout_3.addWidget(self.CabecalhoArquivoQUERY)
 
+
         self.horizontalLayout_4.addLayout(self.verticalLayout_3)
 
         self.horizontalLayout_2 = QHBoxLayout()
@@ -271,7 +278,9 @@ class Ui_tela_BLAST(object):
 
         self.horizontalLayout_2.addWidget(self.ButtomSearchQuery)
 
+
         self.horizontalLayout_4.addLayout(self.horizontalLayout_2)
+
 
         self.gridLayout_4.addLayout(self.horizontalLayout_4, 0, 0, 1, 1)
 
@@ -300,6 +309,7 @@ class Ui_tela_BLAST(object):
 
         self.verticalLayout_4.addWidget(self.CabecalhoArquivoSUBJECT)
 
+
         self.horizontalLayout_5.addLayout(self.verticalLayout_4)
 
         self.horizontalLayout_3 = QHBoxLayout()
@@ -316,9 +326,12 @@ class Ui_tela_BLAST(object):
 
         self.horizontalLayout_3.addWidget(self.ButtomSearchSubject)
 
+
         self.horizontalLayout_5.addLayout(self.horizontalLayout_3)
 
+
         self.gridLayout_4.addLayout(self.horizontalLayout_5, 2, 0, 1, 1)
+
 
         self.gridLayout_2.addWidget(self.frame_2, 1, 0, 1, 3)
 
@@ -337,63 +350,36 @@ class Ui_tela_BLAST(object):
     # setupUi
 
     def retranslateUi(self, tela_BLAST):
-        tela_BLAST.setWindowTitle(
-            QCoreApplication.translate("tela_BLAST", u"BLAST", None))
-        self.Voltar_Prin.setText(
-            QCoreApplication.translate("tela_BLAST", u"Voltar", None))
-        self.Alinhar.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Alinhar", None))
-        self.GAP.setText(QCoreApplication.translate(
-            "tela_BLAST", u"GAP:", None))
-        self.MATCH.setText(QCoreApplication.translate(
-            "tela_BLAST", u"MATCH:", None))
-        self.MISMATCH.setText(QCoreApplication.translate(
-            "tela_BLAST", u"MISMATCH:", None))
-        self.LineGAP.setText(
-            QCoreApplication.translate("tela_BLAST", u"2", None))
-        self.LineMATCH.setText(
-            QCoreApplication.translate("tela_BLAST", u"2", None))
-        self.LineMISMATCH.setText(
-            QCoreApplication.translate("tela_BLAST", u"-3", None))
-        self.Parametros.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Par\u00e2metros:", None))
+        tela_BLAST.setWindowTitle(QCoreApplication.translate("tela_BLAST", u"BLAST", None))
+        self.Voltar_Prin.setText(QCoreApplication.translate("tela_BLAST", u"Voltar", None))
+        self.Alinhar.setText(QCoreApplication.translate("tela_BLAST", u"Alinhar", None))
+        self.GAP.setText(QCoreApplication.translate("tela_BLAST", u"GAP:", None))
+        self.MATCH.setText(QCoreApplication.translate("tela_BLAST", u"MATCH:", None))
+        self.MISMATCH.setText(QCoreApplication.translate("tela_BLAST", u"MISMATCH:", None))
+        self.LineGAP.setText(QCoreApplication.translate("tela_BLAST", u"2", None))
+        self.LineMATCH.setText(QCoreApplication.translate("tela_BLAST", u"2", None))
+        self.LineMISMATCH.setText(QCoreApplication.translate("tela_BLAST", u"-3", None))
+        self.Parametros.setText(QCoreApplication.translate("tela_BLAST", u"Par\u00e2metros:", None))
         self.label_3.setText("")
-        self.SalvarComo.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Salvar como...", None))
-        self.ASN1.setText(QCoreApplication.translate(
-            "tela_BLAST", u"&Texto ASN.1", None))
-        self.BLAST_Format.setText(QCoreApplication.translate(
-            "tela_BLAST", u"B&LAST archive format (ASN.1)", None))
-        self.Comma.setText(QCoreApplication.translate(
-            "tela_BLAST", u"&Comma-separated Values", None))
-        self.FLATIdentities.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Flat - Showing Identities", None))
-        self.FLATnoIdentities.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Flat - No Identities", None))
-        self.NoIdentities.setText(QCoreApplication.translate(
-            "tela_BLAST", u"&No Identities", None))
-        self.ShowingIdentities.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Showin&g Identities", None))
-        self.TextoBinary.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Texto Binary ASN.&1", None))
-        self.Tabular_Co.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Tab&ular - Comentado", None))
-        self.XML.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Saida &XML", None))
-        self.Pairwise.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Pairwise", None))
-        self.Tabular.setText(QCoreApplication.translate(
-            "tela_BLAST", u"Tabular", None))
-# if QT_CONFIG(whatsthis)
-        self.ButtonQuery.setWhatsThis(QCoreApplication.translate(
-            "tela_BLAST", u"<html><head/><body><p><br/></p></body></html>", None))
-# endif // QT_CONFIG(whatsthis)
-        self.ButtonQuery.setText(
-            QCoreApplication.translate("tela_BLAST", u"Query", None))
-        self.ButtomSearchQuery.setText(
-            QCoreApplication.translate("tela_BLAST", u"Search", None))
-        self.ButtonSubject.setText(
-            QCoreApplication.translate("tela_BLAST", u"Subject", None))
-        self.ButtomSearchSubject.setText(
-            QCoreApplication.translate("tela_BLAST", u"Search", None))
+        self.SalvarComo.setText(QCoreApplication.translate("tela_BLAST", u"Salvar como...", None))
+        self.ASN1.setText(QCoreApplication.translate("tela_BLAST", u"&Texto ASN.1", None))
+        self.BLAST_Format.setText(QCoreApplication.translate("tela_BLAST", u"B&LAST archive format (ASN.1)", None))
+        self.Comma.setText(QCoreApplication.translate("tela_BLAST", u"&Comma-separated Values", None))
+        self.FLATIdentities.setText(QCoreApplication.translate("tela_BLAST", u"Flat - Showing Identities", None))
+        self.FLATnoIdentities.setText(QCoreApplication.translate("tela_BLAST", u"Flat - No Identities", None))
+        self.NoIdentities.setText(QCoreApplication.translate("tela_BLAST", u"&No Identities", None))
+        self.ShowingIdentities.setText(QCoreApplication.translate("tela_BLAST", u"Showin&g Identities", None))
+        self.TextoBinary.setText(QCoreApplication.translate("tela_BLAST", u"Texto Binary ASN.&1", None))
+        self.Tabular_Co.setText(QCoreApplication.translate("tela_BLAST", u"Tab&ular - Comentado", None))
+        self.XML.setText(QCoreApplication.translate("tela_BLAST", u"Saida &XML", None))
+        self.Pairwise.setText(QCoreApplication.translate("tela_BLAST", u"Pairwise", None))
+        self.Tabular.setText(QCoreApplication.translate("tela_BLAST", u"Tabular", None))
+#if QT_CONFIG(whatsthis)
+        self.ButtonQuery.setWhatsThis(QCoreApplication.translate("tela_BLAST", u"<html><head/><body><p><br/></p></body></html>", None))
+#endif // QT_CONFIG(whatsthis)
+        self.ButtonQuery.setText(QCoreApplication.translate("tela_BLAST", u"Query", None))
+        self.ButtomSearchQuery.setText(QCoreApplication.translate("tela_BLAST", u"Search", None))
+        self.ButtonSubject.setText(QCoreApplication.translate("tela_BLAST", u"Subject", None))
+        self.ButtomSearchSubject.setText(QCoreApplication.translate("tela_BLAST", u"Search", None))
     # retranslateUi
+
