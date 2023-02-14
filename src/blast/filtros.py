@@ -1,5 +1,6 @@
 import glob
 import warnings
+import numpy as np
 import pandas as pd
 
 from PySide6.QtWidgets import *
@@ -79,27 +80,60 @@ class filtrosBlast:
 
         """
         dir_path = self.caminhoDiretorio + "/ResultAlin.out"
+        print(dir_path)
         files_align = glob.glob(dir_path)
-        alinhamentos = pd.read_csv(files_align[0], header=None, delimiter='	')
+        self.alinhamentos = pd.read_csv(files_align[0], header=None, delimiter='	')
         # print('Alinhamentos da: {}'.format(len(alinhamentos)))
         if self.screenFiltros_ui.checkBox_Identidade.isChecked():
-            genes_unicos = alinhamentos[1].unique()
-            t = alinhamentos[(alinhamentos[1] == genes_unicos[0])]
-            m = t[2].argmax()
-            t.loc[[m]]
-            for gu in genes_unicos[1:]:
-                t2 = alinhamentos[(alinhamentos[1] == gu)]
-                m = t2[2].argmax()
-                t2 = t2.loc[[m]]
-                t = t.append(t2)
-            alinhamentos = t
-            # print("Alinhamentos após filtro de identidade:", len(alinhamentos))
+            self.filtroIdentidade()
         if self.screenFiltros_ui.checkBox_EValue.isChecked():
-            e = self.screenFiltros_ui.SpinBox_EValue.value()
-            alinhamentos = alinhamentos[alinhamentos[10] <= e]
-            # print("Alinhamentos após limiar do E-value:", len(alinhamentos))
+            self.filtroEValue()
         if self.screenFiltros_ui.checkBox_RAG.isChecked():
             pass
+        
+    def filtroRAG(self):
+        pass
+        # limiar = self.screenFiltros_ui.SpinBox_RAG.value()
+        # len_alig = list(np.absolute(self.alinhamentos[9]-self.alinhamentos[8]))
+        # gene_names = list(self.alinhamentos[1])
+        # size_gene = []
+        # for gn in gene_names:
+        #     size_gene.append(look_gene(gn, genes_inform))
+        # razao = np.zeros([len(len_alig), 2])
+        # for id_la, la in enumerate(len_alig):
+        #     razao[id_la, 0] = int(id_la)
+        #     razao[id_la, 1] = la/size_gene[id_la]
+        # cont_limiar = 0
+        # t = pd.DataFrame()
+        # for i in razao:
+        #     if i[1] >= limiar:
+        #         t = t.append(self.alinhamentos.iloc[int(i[0])])
+        #         cont_limiar += 1
+        # print("Alinhamentos após limiar da razao alinhamento/gene:", len(t))
+        # return t, razao
+        
+    def filtroIdentidade(self):
+        genes_unicos = self.alinhamentos[1].unique()
+        t = self.alinhamentos[(self.alinhamentos[1] == genes_unicos[0])]
+        m = t[2].argmax()
+        t.loc[[m]]
+        for gu in genes_unicos[1:]:
+            t2 = self.alinhamentos[(self.alinhamentos[1] == gu)]
+            m = t2[2].argmax()
+            t2 = t2.loc[[m]]
+            t = t.append(t2)
+        self.alinhamentos = t
+        # print("Alinhamentos após filtro de identidade:", len(self.alinhamentos))
+        
         arquivo = open("Filtragem.out", "w")
-        arquivo.write(alinhamentos.to_string())
+        arquivo.write(self.alinhamentos.to_string())
+        arquivo.close()
+        
+    def filtroEValue(self):
+        e = self.screenFiltros_ui.SpinBox_EValue.value()
+        self.alinhamentos = self.alinhamentos[self.alinhamentos[10] <= e]
+        # print("Alinhamentos após limiar do E-value:", len(self.alinhamentos))
+        
+        arquivo = open("Filtragem.out", "w")
+        arquivo.write(self.alinhamentos.to_string())
         arquivo.close()
