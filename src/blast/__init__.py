@@ -232,8 +232,12 @@ class funcBlast():
             if (self.Query != None and len(self.Query) > 0) and (self.Subject != None and len(self.Subject) > 0):
                 self.func_Paramentros()
                 self.ChecagemCheckBox()
-                exit_result = os.system(type + " -query " + self.Query + " -subject " +
-                                        self.Subject + self.Estilo + self.penalty + self.reward + " -out ResultAlin.out")
+                if (self.screenBlast.XML.isChecked()):
+                    exit_result = os.system(type + " -query " + self.Query + " -subject " +
+                                            self.Subject + self.Estilo + self.penalty + self.reward + " -out ResultAlin.xml")
+                else:
+                    exit_result = os.system(type + " -query " + self.Query + " -subject " +
+                                            self.Subject + self.Estilo + self.penalty + self.reward + " -out ResultAlin.out")
                 if exit_result == 0:
                     if (self.fileEmpty()):
                         QMessageBox.about(
