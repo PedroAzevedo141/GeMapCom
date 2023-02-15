@@ -138,8 +138,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
-Filtragem.out
-ResultAlin.out
-query_file.fasta
-subject_file.fasta
