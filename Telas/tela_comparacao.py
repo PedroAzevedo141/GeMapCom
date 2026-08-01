@@ -7,7 +7,7 @@ class Ui_Tela_Comparacao(object):
 
         Classe que contem todas as configurações da tela de comparacao da ferramenta.
 
-        Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+        Nessa classe usa-se propriedades da biblioteca PySide6 para facilitar o
         gerenciamento das configurações e interações da tela em questão.
 
     """
@@ -141,4 +141,4 @@ class Ui_Tela_Comparacao(object):
         self.label_2.setText(_translate("Tela_Comparacao", "SEQUÊNCIA 2:"))
         self.botao_abrir_arquivo2.setText(_translate("Tela_Comparacao", "ABRIR ARQUIVO"))
         self.botao_voltar.setText(_translate("Tela_Comparacao", "VOLTAR"))
-        self.botao_realizar_comparacao.setText(_translate("Tela_Comparacao", "RELIZAR COMPARAÇÃO"))
+        self.botao_realizar_comparacao.setText(_translate("Tela_Comparacao", "REALIZAR COMPARAÇÃO"))

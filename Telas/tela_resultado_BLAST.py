@@ -6,7 +6,7 @@ class Ui_tela_Resultado_BLAST(object):
 
     Classe que contem todas as configurações da tela de resultados do BLAST.
 
-    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    Nessa classe usa-se propriedades da biblioteca PySide6 para facilitar o
     gerenciamento das configurações e interações da tela em questão.
 
     """

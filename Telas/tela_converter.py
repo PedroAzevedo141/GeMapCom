@@ -8,7 +8,7 @@ class Ui_Tela_Converter(object):
 
       Classe que contem todas as configurações da tela de converter da ferramenta.
 
-      Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+      Nessa classe usa-se propriedades da biblioteca PySide6 para facilitar o
       gerenciamento das configurações e interações da tela em questão.
 
     """

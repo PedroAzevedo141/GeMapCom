@@ -28,20 +28,20 @@ from Algoritmos.algorithm_smith_waterman import algorithm_smith
 from Algoritmos.algorithm_needleman_wunsch import algorithm_needleman
 
 
-class Ui_Main(QWidget):
+class Ui_Main(object):
     """
 
     Classe que contem todas as configurações da tela inicial da ferramenta.
 
-    Nessa classe usa-se propriedades da biblioteca PyQt5 para facilitar o
+    Nessa classe usa-se propriedades da biblioteca PySide6 para facilitar o
     gerenciamento das configurações e interações da tela em questão.
 
     """
 
-    def setupUi(self, Main):
+    def setupUi(self, Main: QMainWindow) -> None:
         Main.setObjectName('Main')
         Main.resize(1276, 585)
-        Main.setFixedSize(1276, 585)
+        Main.setMinimumSize(1000, 585)
 
         self.QtStack = QStackedLayout()
 
@@ -104,7 +104,7 @@ class Main(QMainWindow, Ui_Main):
 
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: QWidget = None) -> None:
         super(Main, self).__init__(parent)
         self.setupUi(self)
         self.seq1 = ''  # sequencia 1 data 1
@@ -120,7 +120,7 @@ class Main(QMainWindow, Ui_Main):
         self.fqfasta_salvar = ''
 
         self.resultado = ''
-        self.resultado_salvar = ''
+        self.resultado_salvar = None
         self.lista_salvar_resultado = []
 
         self.algo_needle = algorithm_needleman('', '', None, None, None)
@@ -128,16 +128,6 @@ class Main(QMainWindow, Ui_Main):
         self.algo_water = algorithm_smith('', '', None, None, None)
 
         self.create_image = criar_imagem('', '', '', '', None, None)
-
-        self.lista_converter1 = []
-        self.seq_converter1 = ''
-        self.string_converter1 = ''
-        self.string_convertida1 = ''
-
-        self.lista_converter2 = []
-        self.seq_converter1 = ''
-        self.string_converter2 = ''
-        self.string_convertida2 = ''
 
         # Funções dos botões da tela principal.
         self.tela_principal.botao_sair.clicked.connect(self.fecharAplicacao)
@@ -176,10 +166,8 @@ class Main(QMainWindow, Ui_Main):
         self.Result = None
         self.CaminhoDiretorio = os.path.dirname(os.path.realpath(__file__))
         self.tela_blast_1.Voltar_Prin.clicked.connect(self.voltarTelaPrincipal)
-        
-        self.tela_filtros_blast.CaminhoDiretorio_funcao(self.CaminhoDiretorio)
 
-    def apagarValoresTelaComparacao(self):
+    def apagarValoresTelaComparacao(self) -> None:
         """
 
             Função para apagar os valores da tela comparação.
@@ -194,7 +182,7 @@ class Main(QMainWindow, Ui_Main):
         self.tela_resultado.setar_resultado.setText('')
 
         self.resultado = ''
-        self.resultado_salvar = ''
+        self.resultado_salvar = None
         self.lista_salvar_resultado = []
 
         self.algo_needle = algorithm_needleman('', '', None, None, None)
@@ -203,17 +191,7 @@ class Main(QMainWindow, Ui_Main):
 
         self.create_image = criar_imagem('', '', '', '', None, None)
 
-        self.lista_converter1 = []
-        self.seq_converter1 = ''
-        self.string_converter1 = ''
-        self.string_convertida1 = ''
-
-        self.lista_converter2 = []
-        self.seq_converter2 = ''
-        self.string_converter2 = ''
-        self.string_convertida2 = ''
-
-    def apagarValoresTelaConverter(self):
+    def apagarValoresTelaConverter(self) -> None:
         """
 
             Função para apagar os valores da tela converter.
@@ -221,7 +199,7 @@ class Main(QMainWindow, Ui_Main):
         """
         self.tela_converter.setar_sequencia.setText('')
 
-    def voltarTelaPrincipal(self):
+    def voltarTelaPrincipal(self) -> None:
         """
 
             Função para voltar à tela INICIAL.
@@ -233,7 +211,7 @@ class Main(QMainWindow, Ui_Main):
 
         self.QtStack.setCurrentIndex(0)
 
-    def abrirTelaComparacao(self):
+    def abrirTelaComparacao(self) -> None:
         """
 
             Função para abrir tela de comparação.
@@ -242,7 +220,7 @@ class Main(QMainWindow, Ui_Main):
         self.apagarValoresTelaComparacao()
         self.QtStack.setCurrentIndex(1)
 
-    def abrirTelaConverter(self):
+    def abrirTelaConverter(self) -> None:
         """
 
             Função para abrir tela de converter.
@@ -250,7 +228,7 @@ class Main(QMainWindow, Ui_Main):
         """
         self.QtStack.setCurrentIndex(2)
 
-    def abrirArquivo1(self):
+    def abrirArquivo1(self) -> None:
         """
 
             Função para abrir sequencia 1 e colocar na tela.
@@ -259,14 +237,11 @@ class Main(QMainWindow, Ui_Main):
         self.seq1 = QFileDialog.getOpenFileName(
             self, 'Abrir sequencia 1', "", "Fasta Files (*.fasta *.fa)")
         if self.seq1[0]:
-            f = open(self.seq1[0], 'r')
-
-            with f:
-                # self.data1 = f.readline()
+            with open(self.seq1[0], 'r') as f:
                 self.data1 = f.read()
                 self.tela_comparacao.setar_sequencia1.setText(self.data1)
 
-    def abrirArquivo2(self):
+    def abrirArquivo2(self) -> None:
         """
 
             Função para abrir sequencia 2 e colocar na tela.
@@ -275,14 +250,11 @@ class Main(QMainWindow, Ui_Main):
         self.seq2 = QFileDialog.getOpenFileName(
             self, 'Abrir sequencia 2', "", "Fasta Files (*.fasta *.fa)")
         if self.seq2[0]:
-            f = open(self.seq2[0], 'r')
-
-            with f:
-                # self.data2 = f.readline()
+            with open(self.seq2[0], 'r') as f:
                 self.data2 = f.read()
                 self.tela_comparacao.setar_sequencia2.setText(self.data2)
 
-    def comparacao(self):
+    def comparacao(self) -> None:
         """
 
             Função que realiza a comparação LOCAL e GLOBAL, submetendo os arquivos.
@@ -307,7 +279,63 @@ class Main(QMainWindow, Ui_Main):
         else:
             self.comparacaoLocal()
 
-    def comparacaoGlobal(self):
+    def _read_fasta_sequence(self, filepath: str) -> str:
+        """Lê a sequência de um arquivo FASTA usando Biopython."""
+        record = SeqIO.read(filepath, 'fasta')
+        return str(record.seq)
+
+    def _executar_alinhamento(self, modo: str) -> None:
+        """
+            Função auxiliar para realizar os alinhamentos GLOBAL ou LOCAL.
+        """
+        seq1_str = self._read_fasta_sequence(self.seq1[0])
+        seq2_str = self._read_fasta_sequence(self.seq2[0])
+
+        match = int(self.tela_comparacao.match.text())
+        mismatch = int(self.tela_comparacao.mismatch.text())
+        gap = int(self.tela_comparacao.gap.text())
+
+        if modo == 'global':
+            self.algo_needle = algorithm_needleman(seq1_str, seq2_str, match, mismatch, gap)
+            self.algo_needle.needle()
+            
+            identidade = str(self.algo_needle.ident)[:5]
+            score = str(self.algo_needle.seq_score)[:5]
+            align1 = self.algo_needle.align1
+            sym = self.algo_needle.sym
+            align2 = self.algo_needle.align2
+        else:
+            self.algo_water = algorithm_smith(seq1_str, seq2_str, match, mismatch, gap)
+            self.algo_water.water()
+            
+            identidade = str(self.algo_water.identity)[:5]
+            score = str(self.algo_water.max_score)[:5]
+            align1 = self.algo_water.align1
+            sym = self.algo_water.sym
+            align2 = self.algo_water.align2
+
+        self.QtStack.setCurrentIndex(3)
+
+        resultado_texto = (
+            f'Identidade: {identidade}\n'
+            f'Score: {score}\n'
+            f'Sequencia 1: {align1}\n'
+            f'Sym:                {sym}\n'
+            f'Sequencia 2: {align2}'
+        )
+        
+        resultado_salvar = (
+            f'Identidade: {identidade}\n'
+            f'Score: {score}\n'
+            f'Sequencia 1: {align1}\n'
+            f'Sym:         {sym}\n'
+            f'Sequencia 2: {align2}'
+        )
+
+        self.tela_resultado.setar_resultado.append(resultado_texto)
+        self.lista_salvar_resultado.append(resultado_salvar)
+
+    def comparacaoGlobal(self) -> None:
         """
 
             Função que realiza a comparação GLOBAL, utilizando o algoritmo de Needleman-Wunsch.
@@ -315,46 +343,9 @@ class Main(QMainWindow, Ui_Main):
             -> Usada no arquivo tela_comparacao.py / algorithm_needleman_wunsch.py
 
         """
-        with open(self.seq1[0], 'r') as fasta:
-            for linha in fasta:
-                if not linha.startswith('>'):
-                    self.seq_converter1 += linha.strip()
-            self.lista_converter1.append(self.seq_converter1)
+        self._executar_alinhamento('global')
 
-        self.string_converter1 = (str(self.lista_converter1))
-        self.string_convertida1 = self.string_converter1[2:-2]
-
-        with open(self.seq2[0], 'r') as fasta:
-            for linha in fasta:
-                if not linha.startswith('>'):
-                    self.seq_converter2 += linha.strip()
-            self.lista_converter2.append(self.seq_converter2)
-
-        self.string_converter2 = (str(self.lista_converter2))
-        self.string_convertida2 = self.string_converter2[2:-2]
-
-        self.algo_needle = algorithm_needleman(self.string_convertida1,
-                                               self.string_convertida2,
-                                               int(self.tela_comparacao.match.text()),
-                                               int(self.tela_comparacao.mismatch.text()),
-                                               int(self.tela_comparacao.gap.text()))
-
-        self.algo_needle.needle()
-        self.QtStack.setCurrentIndex(3)
-
-        self.tela_resultado.setar_resultado.append('Identidade: ' + str(self.algo_needle.ident)[:5] + '\n' +
-                                                   'Score: ' + str(self.algo_needle.seq_score)[:5] + '\n' +
-                                                   'Sequencia 1: ' + self.algo_needle.align1 + '\n' +
-                                                   'Sym:                ' + self.algo_needle.sym + '\n' +
-                                                   'Sequencia 2: ' + self.algo_needle.align2)
-
-        self.lista_salvar_resultado.append('Identidade: ' + str(self.algo_needle.ident) + '\n' +
-                                           'Score: ' + str(self.algo_needle.seq_score) + '\n' +
-                                           'Sequencia 1: ' + self.algo_needle.align1 + '\n' +
-                                           'Sym:         ' + self.algo_needle.sym + '\n' +
-                                           'Sequencia 2: ' + self.algo_needle.align2)
-
-    def comparacaoLocal(self):
+    def comparacaoLocal(self) -> None:
         """
 
             Função que realiza a comparação LOCAL, utilizando o algoritmo de Smith-Waterman.
@@ -362,46 +353,9 @@ class Main(QMainWindow, Ui_Main):
             -> Usada no arquivo tela_comparacao.py / algorithm_smith_waterman.py
 
         """
-        with open(self.seq1[0], 'r') as fasta:
-            for linha in fasta:
-                if not linha.startswith('>'):
-                    self.seq_converter1 += linha.strip()
-            self.lista_converter1.append(self.seq_converter1)
+        self._executar_alinhamento('local')
 
-        self.string_converter1 = (str(self.lista_converter1))
-        self.string_convertida1 = self.string_converter1[2:-2]
-
-        with open(self.seq2[0], 'r') as fasta:
-            for linha in fasta:
-                if not linha.startswith('>'):
-                    self.seq_converter2 += linha.strip()
-            self.lista_converter2.append(self.seq_converter2)
-
-        self.string_converter2 = (str(self.lista_converter2))
-        self.string_convertida2 = self.string_converter2[2:-2]
-
-        self.algo_water = algorithm_smith(self.string_convertida1,
-                                          self.string_convertida2,
-                                          int(self.tela_comparacao.match.text()),
-                                          int(self.tela_comparacao.mismatch.text()),
-                                          int(self.tela_comparacao.gap.text()))
-
-        self.algo_water.water()
-        self.QtStack.setCurrentIndex(3)
-
-        self.tela_resultado.setar_resultado.append('Identidade: ' + str(self.algo_water.identity)[:5] + '\n' +
-                                                   'Score: ' + str(self.algo_water.max_score) + '\n' +
-                                                   'Sequencia 1: ' + self.algo_water.align1 + '\n' +
-                                                   'Sym:                ' + self.algo_water.sym + '\n' +
-                                                   'Sequencia 2: ' + self.algo_water.align2)
-
-        self.lista_salvar_resultado.append('Identidade: ' + str(self.algo_water.identity)[:5] + '\n' +
-                                           'Score: ' + str(self.algo_water.max_score) + '\n' +
-                                           'Sequencia 1: ' + self.algo_water.align1 + '\n' +
-                                           'Sym:         ' + self.algo_water.sym + '\n' +
-                                           'Sequencia 2: ' + self.algo_water.align2)
-
-    def validarNumero(self, match, mismatch, gap):
+    def validarNumero(self, match: str, mismatch: str, gap: str) -> bool:
         """
 
         Tem como funcionalidade validar o numero o MATCH, MISMATCH e GAP. Para
@@ -411,14 +365,14 @@ class Main(QMainWindow, Ui_Main):
 
         """
         try:
-            match = int(match)
-            mismatch = int(mismatch)
-            gap = int(gap)
+            int(match)
+            int(mismatch)
+            int(gap)
             return True
-        except:
+        except ValueError:
             return False
 
-    def salvarResultadoTxt(self):
+    def salvarResultadoTxt(self) -> None:
         """
 
         Funcionalidade de impressão dos resultados como .txt.
@@ -427,17 +381,15 @@ class Main(QMainWindow, Ui_Main):
 
         """
         self.resultado = QFileDialog.getSaveFileName(
-            self, 'Salvar Resultado', '/home', "Text (*.txt *.asc)")
+            self, 'Salvar Resultado', os.path.expanduser('~'), "Text (*.txt *.asc)")
 
         if self.resultado[0]:
-            self.resultado_salvar = open(self.resultado[0], 'w')
-            with self.resultado_salvar:
+            with open(self.resultado[0], 'w') as self.resultado_salvar:
                 self.resultado_salvar.writelines(self.lista_salvar_resultado)
-                self.resultado_salvar.close()
 
         QMessageBox.about(self, 'Atenção', 'Resultado Salvo')
 
-    def salvarImgem(self):
+    def salvarImgem(self) -> None:
         """
 
         Funcionalidade de impressão dos resultados como IMAGEM.
@@ -445,31 +397,23 @@ class Main(QMainWindow, Ui_Main):
         -> Função da pasta plotar.
 
         """
-        if (self.tela_comparacao.comboBox.currentText() == 'GLOBAL'):
-            img, _ = QFileDialog.getSaveFileName(
-                self, 'Salvar Imagem', '/home', filter="PNG(*.png);; JPEG(*.jpg)")
+        img, _ = QFileDialog.getSaveFileName(
+            self, 'Salvar Imagem', os.path.expanduser('~'), filter="PNG(*.png);; JPEG(*.jpg)")
+        
+        if not img:
+            return
+
+        if self.tela_comparacao.comboBox.currentText() == 'GLOBAL':
             self.create_image = criar_imagem(img, self.algo_needle.align1, self.algo_needle.align2, self.algo_needle.sym, str(
                 self.algo_needle.ident), str(self.algo_needle.seq_score))
-            if img[-3:] == "png":
-                self.create_image.salvarImage()
-                QMessageBox.about(self, 'Atenção', 'Imagem Salva')
-            elif img[-3:] == "jpg":
-                self.create_image.salvarImage()
-                QMessageBox.about(self, 'Atenção', 'Imagem Salva')
-
         else:
-            img, _ = QFileDialog.getSaveFileName(
-                self, 'Salvar Imagem', '/home', filter="PNG(*.png);; JPEG(*.jpg)")
             self.create_image = criar_imagem(img, self.algo_water.align1, self.algo_water.align2, self.algo_water.sym, str(
                 self.algo_water.identity), str(self.algo_water.max_score))
-            if img[-3:] == "png":
-                self.create_image.salvarImage()
-                QMessageBox.about(self, 'Atenção', 'Imagem Salva')
-            elif img[-3:] == "jpg":
-                self.create_image.salvarImage()
-                QMessageBox.about(self, 'Atenção', 'Imagem Salva')
+                
+        self.create_image.salvarImage()
+        QMessageBox.about(self, 'Atenção', 'Imagem Salva')
 
-    def abrirArquivoConverter(self):
+    def abrirArquivoConverter(self) -> None:
         """
 
             Função para salvar o caminho da sequencia inserida pelo usuario na
@@ -480,22 +424,18 @@ class Main(QMainWindow, Ui_Main):
             self.gefasta = QFileDialog.getOpenFileName(
                 self, 'Abrir sequencia', "", "Genbank Files (*.gbk)")
             if self.gefasta[0]:
-                f = open(self.gefasta[0], 'r')
-
-                with f:
+                with open(self.gefasta[0], 'r') as f:
                     self.datage = f.read()
                     self.tela_converter.setar_sequencia.setText(self.datage)
         else:
             self.fqfasta = QFileDialog.getOpenFileName(
                 self, 'Abrir sequencia', "", "FastaQ Files (*.fastaq)")
             if self.fqfasta[0]:
-                f = open(self.fqfasta[0], 'r')
-
-                with f:
+                with open(self.fqfasta[0], 'r') as f:
                     self.datafq = f.read()
                     self.tela_converter.setar_sequencia.setText(self.datafq)
 
-    def converter(self):
+    def converter(self) -> None:
         """
 
             Função que da funcionalidade a tela de converter da ferramenta,
@@ -534,7 +474,7 @@ class Main(QMainWindow, Ui_Main):
                         None, 'Atenção', 'Sequência não convertida')
                 self.apagarValoresTelaConverter()
 
-    def fecharAplicacao(self):
+    def fecharAplicacao(self) -> None:
         """
 
             Função para fechar o software.

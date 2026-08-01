@@ -1,3 +1,6 @@
+import pathlib
+from typing import Union, Optional
+
 class resultBlast():
     
     def initScreens(self, homeScreen) -> None:
@@ -8,49 +11,35 @@ class resultBlast():
         self.screenResult.Finalizar.clicked.connect(self.voltarTelaPrincipal)
         self.screenResult.Voltar.clicked.connect(self.voltarTela)
         
-    def voltarTelaPrincipal(self):
+    def voltarTelaPrincipal(self) -> None:
         self.screenBlast.apagarValoresTelaBlast()
-        
         self.homeScreen.QtStack.setCurrentIndex(0)
         
-    def voltarTela(self):
+    def voltarTela(self) -> None:
         """
-
-            Função de funcionalidade do botão "Voltar" que está na tela de RESULTADOS
-            do BLAST, dependendo do tipo de saida do resultado o "Voltar" irá para
-            uma tela especifica, como os filtros só tem funcionalidade para as saídas
-            TABULAR, então, se o resultado for TABULAR, quando apertar o botão "Voltar"
-            irá para tela de filtros, caso não seja TABULAR a tela será a de INICIO
-            do BLAST.
-
+            Função de funcionalidade do botão "Voltar"
         """
-        if (self.homeScreen.tela_blast.tabularCheck()):
+        if self.homeScreen.tela_blast.tabularCheck():
             self.homeScreen.QtStack.setCurrentIndex(6)
         else:
             self.homeScreen.QtStack.setCurrentIndex(4)
             
-    def resultadoFiltragem(self):
+    def resultadoFiltragem(self, file_path: Optional[Union[str, pathlib.Path]] = None) -> None:
         """
-
-            Função que abre e lê o arquivo "Filtragem.out" e ilustra o mesmo na
-            tela.
-
+            Função que abre e lê o arquivo filtrado e ilustra o mesmo na tela.
         """
-        Result = 'Filtragem.out'
-        f = open(Result, 'r')
-        file_text = f.read()
-        self.screenResult.Saida.setText(file_text)
-        f.close()
+        p = pathlib.Path(file_path) if file_path else pathlib.Path('Filtragem.out')
+        if p.exists():
+            with open(p, 'r') as f:
+                file_text = f.read()
+            self.screenResult.Saida.setText(file_text)
 
-    def resultadoAlinhamento(self):
+    def resultadoAlinhamento(self, file_path: Optional[Union[str, pathlib.Path]] = None) -> None:
         """
-
-            Função que abre e lê o arquivo "ResultAlin.out" e ilustra o mesmo na
-            tela.
-
+            Função que abre e lê o arquivo de resultado e ilustra o mesmo na tela.
         """
-        Result = 'ResultAlin.out'
-        f = open(Result, 'r')
-        file_text = f.read()
-        self.screenResult.Saida.setText(file_text)
-        f.close()
+        p = pathlib.Path(file_path) if file_path else pathlib.Path('ResultAlin.out')
+        if p.exists():
+            with open(p, 'r') as f:
+                file_text = f.read()
+            self.screenResult.Saida.setText(file_text)
