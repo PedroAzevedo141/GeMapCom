@@ -71,29 +71,29 @@ pip install -r requirements.txt
 ## ▶️ Executando
 
 ```bash
-python GeMapCom.py
+python run.py
 ```
 
 ## 📁 Estrutura do Projeto
 
+O projeto segue a arquitetura profissional `src-layout`:
+
 ```
 GeMapCom/
-├── GeMapCom.py              # Aplicação principal
-├── Algoritmos/              # Algoritmos de alinhamento (Biopython)
-│   ├── algorithm_needleman_wunsch.py
-│   └── algorithm_smith_waterman.py
-├── src/blast/               # Módulo BLAST+
-│   ├── __init__.py          # Lógica principal do BLAST
-│   ├── filtros.py           # Filtros de resultados
-│   ├── result.py            # Exibição de resultados
-│   ├── searchAlign.py       # Busca NCBI Entrez
-│   └── graphKablammo.py     # Visualização Kablammo
-├── Telas/                   # Interfaces gráficas (PySide6)
-├── Plotar/                  # Geração de imagens de resultados
-├── images/                  # Assets visuais
-├── css/                     # Estilos Kablammo
-├── js/                      # JavaScript Kablammo
-└── requirements.txt         # Dependências Python
+├── src/
+│   └── gemapcom/               # Módulo principal da aplicação
+│       ├── app.py              # Classe principal GUI
+│       ├── core/               # Lógica de negócio (Biopython e BLAST)
+│       ├── ui/                 # Telas e componentes visuais (PySide6)
+│       ├── plot/               # Visualização estática (Matplotlib)
+│       ├── resources/          # Recursos compilados do Qt
+│       └── web/                # Interface web interativa (Kablammo)
+├── assets/                     # Imagens, dados e mockups
+├── docs/                       # Manuais e documentações
+├── tests/                      # Casos de teste
+├── run.py                      # Script de inicialização
+├── requirements.txt            # Dependências Python
+└── README.md                   # Este arquivo
 ```
 
 ## 🛠️ Tecnologias

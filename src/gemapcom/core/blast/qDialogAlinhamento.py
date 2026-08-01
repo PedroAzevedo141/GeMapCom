@@ -1,7 +1,7 @@
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
-from Telas.qDialogBlast import Ui_Dialog_Custom
+from src.gemapcom.ui.qDialogBlast import Ui_Dialog_Custom
 
 class EmployeeDlg(QDialog):
     """Employee dialog."""

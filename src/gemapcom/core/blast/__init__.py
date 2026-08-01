@@ -7,8 +7,8 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
-from src.blast.searchAlign import EmployeeSearch
-from src.blast.qDialogAlinhamento import EmployeeDlg
+from src.gemapcom.core.blast.searchAlign import EmployeeSearch
+from src.gemapcom.core.blast.qDialogAlinhamento import EmployeeDlg
 from .graphKablammo import kablammoBlast
 
 

@@ -7,7 +7,7 @@ from PySide6.QtWidgets import *
 from PySide6.QtGui import *
 from PySide6.QtCore import *
 
-from Telas.tela_QWebView import Ui_telaQWebView
+from src.gemapcom.ui.tela_QWebView import Ui_telaQWebView
 
 class kablammoBlast:
 
@@ -43,7 +43,7 @@ class kablammoBlast:
         
     def abrirQWebView(self) -> None: 
         self.gerarPortas()
-        self.qWebView.webViewXML.setUrl(QUrl('http://127.0.0.1:' + str(self.PORT)))
+        self.qWebView.webViewXML.setUrl(QUrl('http://127.0.0.1:' + str(self.PORT) + '/src/gemapcom/web/index.html'))
         self.QtStack.setCurrentIndex(7)
         
     def voltarTelaBlast(self) -> None:

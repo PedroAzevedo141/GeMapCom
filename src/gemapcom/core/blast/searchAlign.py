@@ -6,7 +6,7 @@ from typing import Optional
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
-from Telas.tela_dialog_search import Ui_DialogSearch
+from src.gemapcom.ui.tela_dialog_search import Ui_DialogSearch
 
 
 class EmployeeSearch(QDialog):

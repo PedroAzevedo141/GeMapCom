@@ -12,7 +12,7 @@ from PySide6.QtGui import *
 from PySide6.QtCore import *
 from PySide6.QtWidgets import *
 
-import rc_control_ext_files
+import src.gemapcom.resources.rc_control_ext_files as rc_control_ext_files
 
 
 class Ui_Tela_Principal(object):

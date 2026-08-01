@@ -7,25 +7,25 @@ from PySide6.QtWidgets import *
 
 from Bio import SeqIO
 
-from Plotar.main import criar_imagem
-from src.blast.graphKablammo import kablammoBlast
+from src.gemapcom.plot.main import criar_imagem
+from src.gemapcom.core.blast.graphKablammo import kablammoBlast
 
-from src.blast import funcBlast as blast
-from src.blast.result import resultBlast
-from src.blast.filtros import filtrosBlast
+from src.gemapcom.core.blast import funcBlast as blast
+from src.gemapcom.core.blast.result import resultBlast
+from src.gemapcom.core.blast.filtros import filtrosBlast
 
-from Telas.tela_BLAST import Ui_tela_BLAST
-from Telas.tela_principal import Ui_Tela_Principal
-from Telas.tela_converter import Ui_Tela_Converter
-from Telas.tela_resultado import Ui_Tela_Resultado
-from Telas.tela_comparacao import Ui_Tela_Comparacao
-from Telas.tela_filtros_BLAST import Ui_tela_Filtros_BLAST
-from Telas.tela_resultado_BLAST import Ui_tela_Resultado_BLAST
-from Telas.tela_QWebView import Ui_telaQWebView
-from Telas.qDialogBlast import Ui_Dialog_Custom
+from src.gemapcom.ui.tela_BLAST import Ui_tela_BLAST
+from src.gemapcom.ui.tela_principal import Ui_Tela_Principal
+from src.gemapcom.ui.tela_converter import Ui_Tela_Converter
+from src.gemapcom.ui.tela_resultado import Ui_Tela_Resultado
+from src.gemapcom.ui.tela_comparacao import Ui_Tela_Comparacao
+from src.gemapcom.ui.tela_filtros_BLAST import Ui_tela_Filtros_BLAST
+from src.gemapcom.ui.tela_resultado_BLAST import Ui_tela_Resultado_BLAST
+from src.gemapcom.ui.tela_QWebView import Ui_telaQWebView
+from src.gemapcom.ui.qDialogBlast import Ui_Dialog_Custom
 
-from Algoritmos.algorithm_smith_waterman import algorithm_smith
-from Algoritmos.algorithm_needleman_wunsch import algorithm_needleman
+from src.gemapcom.core.align.algorithm_smith_waterman import algorithm_smith
+from src.gemapcom.core.align.algorithm_needleman_wunsch import algorithm_needleman
 
 
 class Ui_Main(object):
